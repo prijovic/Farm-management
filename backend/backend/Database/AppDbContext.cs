@@ -10,7 +10,7 @@ public class AppDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
     }
-
+    
     public DbSet<Parcel> Parcels { get; set; }
 
     public DbSet<ParcelOperation> ParcelOperations { get; set; }
@@ -18,7 +18,7 @@ public class AppDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        
+
         builder.Entity<User>(entity =>
         {
             entity.HasMany<Parcel>(e => e.Parcels)

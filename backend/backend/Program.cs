@@ -1,6 +1,8 @@
 using System.Text;
+using backend.Configurations;
 using backend.Database;
 using backend.Models;
+using backend.Services.auth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -43,8 +45,22 @@ builder.Services.AddAuthentication(options =>
         options.TokenValidationParameters = tokenValidationParameters;
     });
 
-builder.Services.AddIdentity<User, IdentityRole<Guid>>(options => { }).AddEntityFrameworkStores<AppDbContext>()
+builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
+    {
+        options.SignIn.RequireConfirmedAccount = false;
+        options.SignIn.RequireConfirmedEmail = false;
+        options.User.RequireUniqueEmail = true;
+        options.Password.RequiredLength = 12;
+        options.Lockout.AllowedForNewUsers = true;
+        options.Lockout.MaxFailedAccessAttempts = 3;
+    })
+    .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddSingleton(tokenValidationParameters);
+builder.Services.AddScoped<SignUpUser>();
 
 var app = builder.Build();
 
@@ -55,9 +71,17 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors(x =>
+    x.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader());
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseAuthentication();
+
+app.AddGlobalErrorHandler();
 
 app.MapControllers();
 
