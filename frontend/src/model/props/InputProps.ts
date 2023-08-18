@@ -3,7 +3,8 @@ export interface InputProps {
     type?: string;
     id: string;
     value: any;
-    onChange: (value: string) => void;
+    onChange: (value: any) => void;
+    onValidityChange: (value: boolean) => void;
     validators?: { [key: string]: RegExp };
     required?: boolean;
 }

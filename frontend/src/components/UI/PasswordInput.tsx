@@ -4,9 +4,18 @@ import {Visibility, VisibilityOff} from "@mui/icons-material";
 import {InputProps} from "../../model/props/InputProps";
 import {useInput} from "../../hooks/useInput";
 
-export const PasswordInput: React.FC<InputProps> = ({label, type, id, validators, value, required, onChange}) => {
+export const PasswordInput: React.FC<InputProps> = ({
+                                                        label,
+                                                        type,
+                                                        id,
+                                                        validators,
+                                                        value,
+                                                        required,
+                                                        onChange,
+                                                        onValidityChange
+                                                    }) => {
     const [showPassword, setShowPassword] = React.useState(false);
-    const {isValid, error, handleOnChange} = useInput({required, label, validators, onChange});
+    const {isValid, error, handleOnChange} = useInput({required, label, validators, onChange, onValidityChange});
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
