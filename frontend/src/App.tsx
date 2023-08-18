@@ -6,6 +6,7 @@ import {RootLayout} from "./layouts/RootLayout";
 import {AuthPage} from "./pages/AuthPage";
 import {LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterMoment} from "@mui/x-date-pickers/AdapterMoment";
+import {createTheme, ThemeProvider} from "@mui/material";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -17,7 +18,9 @@ const router = createBrowserRouter(
 
 function App() {
     return (<LocalizationProvider dateAdapter={AdapterMoment}>
-        <RouterProvider router={router}/>
+        <ThemeProvider theme={createTheme({palette: {mode: "light"}})}>
+            <RouterProvider router={router}/>
+        </ThemeProvider>
     </LocalizationProvider>);
 }
 
