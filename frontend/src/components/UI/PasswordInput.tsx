@@ -6,7 +6,6 @@ import {useInput} from "../../hooks/useInput";
 
 export const PasswordInput: React.FC<InputProps> = ({
                                                         label,
-                                                        type,
                                                         id,
                                                         validators,
                                                         value,
@@ -25,7 +24,7 @@ export const PasswordInput: React.FC<InputProps> = ({
 
     return (
         <FormControl variant="outlined">
-            <InputLabel error={!isValid} htmlFor={id}>{label}</InputLabel>
+            <InputLabel error={!isValid} htmlFor={id}>{label + (required ? " *" : "")}</InputLabel>
             <OutlinedInput
                 id={id}
                 value={value}

@@ -29,7 +29,7 @@ export const useInput: (args: UseInputArgs) => UseInputRes = ({
         if (!isTouched) {
             setIsTouched(true);
         }
-        if (required && (value === '' || value === null)) {
+        if (required && (value === '' || !value)) {
             setError(`${label} is a mandatory field`);
             onValidityChange(false);
         } else if (!testValue(value)) {

@@ -82,7 +82,7 @@ export const AddressInput: React.FC<InputProps> = ({id, required, label, onValid
                 setInputValue(newInputValue);
             }}
             renderInput={(params) => (
-                <TextField {...params} label={label} fullWidth/>
+                <TextField {...params} label={label + " *"} fullWidth/>
             )}
             renderOption={(props, option, {index}) => {
 

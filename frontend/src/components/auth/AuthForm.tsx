@@ -61,7 +61,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({mode}) => {
     const [notificationType, setNotificationType] = useState<AlertColor | null>(null);
 
     const formIsValid: boolean = (mode === AuthMode.LOGIN) ? emailIsValid && passwordIsValid :
-        emailIsValid && passwordIsValid && nameIsValid && surnameIsValid && birthDateIsValid && addressIsValid && farmNameIsValid;
+        emailIsValid && passwordIsValid && nameIsValid && surnameIsValid && birthDateIsValid && !!birthDate && addressIsValid && !!address && farmNameIsValid;
 
     const changeHandler = (inputType: AuthInputs) => {
         let methodToExecute: (value: any) => void;
