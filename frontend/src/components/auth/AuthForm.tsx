@@ -9,6 +9,7 @@ import {AddressInput} from "../UI/AddressInput";
 import {Address} from "../../model/entities/Address";
 import {Moment} from "moment";
 import {sendSignUpRequest} from "../../http/auth";
+import {useNavigate} from "react-router-dom";
 
 export enum AuthInputs {
     EMAIL,
@@ -62,6 +63,8 @@ export const AuthForm: React.FC<AuthFormProps> = ({mode}) => {
 
     const formIsValid: boolean = (mode === AuthMode.LOGIN) ? emailIsValid && passwordIsValid :
         emailIsValid && passwordIsValid && nameIsValid && surnameIsValid && birthDateIsValid && !!birthDate && addressIsValid && !!address && farmNameIsValid;
+
+    const navigate = useNavigate();
 
     const changeHandler = (inputType: AuthInputs) => {
         let methodToExecute: (value: any) => void;
@@ -129,8 +132,13 @@ export const AuthForm: React.FC<AuthFormProps> = ({mode}) => {
                     farmName
                 })
                     .then(() => {
-                        setNotificationMessage("Successful sign up!")
+                        setNotificationMessage("Successful sign up!");
                         setNotificationType("success");
+                        setEmail("");
+                        setEmailIsValid(false);
+                        setPassword("");
+                        setEmailIsValid(false);
+                        navigate("/auth/login", {replace: true});
                     })
                     .catch((res) => {
                         setNotificationMessage(res.response.data.error);
@@ -151,7 +159,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({mode}) => {
     return (
         <>
             <Snackbar anchorOrigin={{vertical: "top", horizontal: "center"}} open={!!notificationMessage}
-                      autoHideDuration={2000} onClose={handleClose}>
+                      autoHideDuration={3000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity={notificationType!}
                        sx={{width: '100%'}}>
                     {notificationMessage}
