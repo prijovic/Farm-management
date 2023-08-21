@@ -7,6 +7,8 @@ import {logout as logoutAction, selectIsAuthenticated} from "../store/features/a
 import {useAppDispatch, useAppSelector} from "../store/hooks";
 import logo from "../assets/lilly021.png";
 import classes from "./MainNavbar.module.css";
+import {ThemeToggle} from "./ThemeToggle";
+import {selectTheme, Theme} from "../store/features/uiSlice";
 
 const pages = ['Login', 'Sign Up'];
 const routes = ['/auth/login', '/auth/signUp'];
@@ -14,6 +16,7 @@ const routes = ['/auth/login', '/auth/signUp'];
 export const MainNavbar: React.FC = () => {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const isAuthenticated = useAppSelector(selectIsAuthenticated);
+    const theme = useAppSelector(selectTheme);
     const dispatch = useAppDispatch();
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -70,7 +73,7 @@ export const MainNavbar: React.FC = () => {
     }
 
     return (
-        <AppBar position="static">
+        <AppBar className={theme === Theme.LIGHT ? classes.light : undefined} position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <NavLink to={"/"}>
@@ -113,6 +116,7 @@ export const MainNavbar: React.FC = () => {
                     <Box sx={{flexGrow: 1, display: {xs: 'none', sm: 'flex'}, justifyContent: "flex-end"}}>
                         {navLinks()}
                     </Box>
+                    <ThemeToggle/>
                 </Toolbar>
             </Container>
         </AppBar>

@@ -6,7 +6,7 @@ import {RootLayout} from "./layouts/RootLayout";
 import {AuthPage} from "./pages/AuthPage";
 import {LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterMoment} from "@mui/x-date-pickers/AdapterMoment";
-import {createTheme, ThemeProvider} from "@mui/material";
+import {createTheme, CssBaseline, ThemeProvider} from "@mui/material";
 import {HomePage} from "./pages/HomePage";
 import {useAppSelector} from "./store/hooks";
 import {selectTheme} from "./store/features/uiSlice";
@@ -26,6 +26,7 @@ function App() {
 
     return (<LocalizationProvider dateAdapter={AdapterMoment}>
         <ThemeProvider theme={createTheme({palette: {mode: theme}})}>
+            <CssBaseline/>
             <Notification/>
             <RouterProvider router={router}/>
         </ThemeProvider>

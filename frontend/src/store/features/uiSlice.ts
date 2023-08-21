@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {RootState} from "../index";
 
-enum Theme {
+export enum Theme {
     LIGHT = "light",
     DARK = "dark"
 }
