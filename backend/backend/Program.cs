@@ -74,6 +74,7 @@ builder.Services.AddScoped<GenerateJwt>();
 builder.Services.AddScoped<GetLoggedInUser>();
 
 builder.Services.AddScoped<GetAllUserParcels>();
+builder.Services.AddScoped<CreateParcel>();
 
 var app = builder.Build();
 
