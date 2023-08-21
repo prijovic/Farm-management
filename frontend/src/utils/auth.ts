@@ -41,7 +41,3 @@ export const logout = () => {
     }
     localStorage.removeItem(storageTokenKey);
 }
-
-export const tokenLoader = () => {
-    return getToken();
-}

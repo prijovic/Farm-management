@@ -11,12 +11,18 @@ import {HomePage} from "./pages/HomePage";
 import {useAppSelector} from "./store/hooks";
 import {selectTheme} from "./store/features/uiSlice";
 import {Notification} from "./components/Notification";
+import {ParcelsPage} from "./pages/ParcelsPage";
+import {ParcelDetailsPage} from "./pages/ParcelDetailsPage";
+import {ParcelEditPage} from "./pages/ParcelEditPage";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<RootLayout/>}>
             <Route index={true} element={<HomePage/>}/>
             <Route path="auth/:mode" element={<AuthPage/>}/>
+            <Route path="parcel/all" element={<ParcelsPage/>}/>
+            <Route path="parcel/:id" element={<ParcelDetailsPage/>}/>
+            <Route path="parcel/:id/edit" element={<ParcelEditPage/>}/>
         </Route>
     )
 );

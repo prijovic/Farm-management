@@ -1,0 +1,4 @@
+.card:is(:hover, :focus) {
+    transition: 0.1s ease-in-out;
+    transform: translateX(0.1rem) translateY(-0.2rem);
+}
