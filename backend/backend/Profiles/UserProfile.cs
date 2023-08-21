@@ -28,20 +28,5 @@ public class UserProfile : Profile
             .ForMember(dest => dest.Surname, options => options.MapFrom(src => src.Surname))
             .ForMember(dest => dest.Email, options => options.MapFrom(src => src.Email))
             .ForMember(dest => dest.Address, options => options.MapFrom(src => src.Address));
-
-        CreateMap<Address, AddressDTO>()
-            .ForMember(dest => dest.Country, options => options.MapFrom(src => src.Country))
-            .ForMember(dest => dest.Place, options => options.MapFrom(src => src.Place))
-            .ForMember(dest => dest.Street, options => options.MapFrom(src => src.Street))
-            .ForMember(dest => dest.PostalCode, options => options.MapFrom(src => src.PostalCode))
-            .ForMember(dest => dest.Number, options => options.MapFrom(src => src.Number));
-
-        CreateMap<AddressDTO, Address>()
-            .ForMember(dest => dest.Id, options => options.MapFrom(src => Guid.NewGuid()))
-            .ForMember(dest => dest.Country, options => options.MapFrom(src => src.Country))
-            .ForMember(dest => dest.Place, options => options.MapFrom(src => src.Place))
-            .ForMember(dest => dest.Street, options => options.MapFrom(src => src.Street))
-            .ForMember(dest => dest.PostalCode, options => options.MapFrom(src => src.PostalCode))
-            .ForMember(dest => dest.Number, options => options.MapFrom(src => src.Number));
     }
 }
