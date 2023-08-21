@@ -21,6 +21,7 @@ const router = createBrowserRouter(
             <Route index={true} element={<HomePage/>}/>
             <Route path="auth/:mode" element={<AuthPage/>}/>
             <Route path="parcel/all" element={<ParcelsPage/>}/>
+            <Route path="parcel/new" element={<ParcelEditPage/>}/>
             <Route path="parcel/:id" element={<ParcelDetailsPage/>}/>
             <Route path="parcel/:id/edit" element={<ParcelEditPage/>}/>
         </Route>

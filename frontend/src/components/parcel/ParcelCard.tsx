@@ -6,7 +6,6 @@ import {Parcel} from "../../model/entities/Parcel";
 import {toDateOutput} from "../../utils/toDateOutput";
 
 export const ParcelCard: React.FC<{ parcel: Parcel }> = ({parcel}) => {
-    console.log(parcel);
 
     return (
         <Link to={`/parcel/${parcel.id}`}>

@@ -7,4 +7,5 @@ export interface InputProps {
     onValidityChange: (value: boolean) => void;
     validators?: { [key: string]: RegExp };
     required?: boolean;
+    inputProps?: any;
 }

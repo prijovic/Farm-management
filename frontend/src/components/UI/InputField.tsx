@@ -11,7 +11,8 @@ export const InputField: React.FC<InputProps> = ({
                                                      value,
                                                      required,
                                                      onChange,
-                                                     onValidityChange
+                                                     onValidityChange,
+                                                     inputProps
                                                  }) => {
     const {isValid, error, handleOnChange} = useInput({required, label, validators, onChange, onValidityChange});
 
@@ -21,6 +22,8 @@ export const InputField: React.FC<InputProps> = ({
                    value={value}
                    error={!isValid}
                    helperText={!isValid && error}
-                   onChange={(event) => handleOnChange(event.target.value)}></TextField>
+                   onChange={(event) => handleOnChange(event.target.value)}
+                   inputProps={inputProps}
+        ></TextField>
     );
 };
