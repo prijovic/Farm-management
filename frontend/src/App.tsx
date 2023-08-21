@@ -1,26 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {RouterProvider} from "react-router";
+import {createBrowserRouter, createRoutesFromElements, Route} from "react-router-dom";
+import {RootLayout} from "./layouts/RootLayout";
+import {AuthPage} from "./pages/AuthPage";
+import {LocalizationProvider} from "@mui/x-date-pickers";
+import {AdapterMoment} from "@mui/x-date-pickers/AdapterMoment";
+import {createTheme, ThemeProvider} from "@mui/material";
+
+const router = createBrowserRouter(
+    createRoutesFromElements(
+        <Route path="/" element={<RootLayout/>}>
+            <Route path="auth/:mode" element={<AuthPage/>}/>
+        </Route>
+    )
+);
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (<LocalizationProvider dateAdapter={AdapterMoment}>
+        <ThemeProvider theme={createTheme({palette: {mode: "light"}})}>
+            <RouterProvider router={router}/>
+        </ThemeProvider>
+    </LocalizationProvider>);
 }
 
 export default App;
