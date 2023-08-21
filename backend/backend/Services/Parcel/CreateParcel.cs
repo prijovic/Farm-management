@@ -23,7 +23,7 @@ public class CreateParcel
 
     public async Task<ParcelResponse> Execute(HttpRequest request, CreateParcelRequest createParcelRequest)
     {
-        var existingParcel = await _context.Parcels.FirstAsync((p) => p.Number == createParcelRequest.Number);
+        var existingParcel = await _context.Parcels.FirstOrDefaultAsync((p) => p.Number == createParcelRequest.Number);
         if (existingParcel != null)
         {
             throw new ParcelExistsException();
