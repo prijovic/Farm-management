@@ -11,10 +11,20 @@ namespace backend.Controllers;
 public class AuthController : ControllerBase
 {
     private readonly SignUpUser _signUpUser;
+    private readonly LoginUser _loginUser;
 
-    public AuthController(SignUpUser signUpUser)
+    public AuthController(SignUpUser signUpUser, LoginUser loginUser)
     {
         _signUpUser = signUpUser;
+        _loginUser = loginUser;
+    }
+
+    [HttpPost("login")]
+    public async Task<string> Login(LoginRequest loginRequest)
+    {
+        if (!ModelState.IsValid) throw new BadRequestException("Invalid data");
+        
+        return await _loginUser.Execute(loginRequest);
     }
 
     [HttpPost("signUp")]

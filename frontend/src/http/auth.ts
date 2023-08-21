@@ -16,7 +16,8 @@ interface LoginRequestBody {
     password: string,
 }
 
-export const sendLoginRequest = () => {
+export const sendLoginRequest = (body: LoginRequestBody) => {
+    return axios.post<string>(config.api + "auth/login", body);
 };
 
 export const sendSignUpRequest = (body: SignUpRequestBody) => {

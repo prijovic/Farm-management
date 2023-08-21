@@ -1,34 +1,86 @@
 import React from "react";
 import {AppBar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar, Typography} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import {NavLink} from "react-router-dom";
+import {Link, NavLink} from "react-router-dom";
+import {logout} from "../utils/auth";
+import {logout as logoutAction, selectIsAuthenticated} from "../store/features/authSlice";
+import {useAppDispatch, useAppSelector} from "../store/hooks";
+import logo from "../assets/lilly021.png";
+import classes from "./MainNavbar.module.css";
+import {ThemeToggle} from "./ThemeToggle";
+import {selectTheme, Theme} from "../store/features/uiSlice";
 
 const pages = ['Login', 'Sign Up'];
 const routes = ['/auth/login', '/auth/signUp'];
 
 export const MainNavbar: React.FC = () => {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-    const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+    const isAuthenticated = useAppSelector(selectIsAuthenticated);
+    const theme = useAppSelector(selectTheme);
+    const dispatch = useAppDispatch();
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
-    };
-    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElUser(event.currentTarget);
     };
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
 
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
+    const menuItems = () => {
+        return !isAuthenticated ? pages.map((page, index) => (
+            <NavLink key={page} to={routes[index]}>
+                <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page}</Typography>
+                </MenuItem>
+            </NavLink>
+        )) : [
+            <Link key={"Logout"} to={"/auth/login"}>
+                <MenuItem onClick={() => {
+                    handleCloseNavMenu();
+                    logout();
+                    dispatch(logoutAction());
+                }}>
+                    <Typography textAlign="center">Logout</Typography>
+                </MenuItem>
+            </Link>
+        ];
+    }
+
+    const navLinks = () => {
+        return !isAuthenticated ? pages.map((page, index) => (
+            <NavLink key={page} to={routes[index]}>
+                <Button
+                    onClick={handleCloseNavMenu}
+                    sx={{my: 2, color: 'white', display: 'block'}}
+                >
+                    {page}
+                </Button>
+            </NavLink>
+        )) : [
+            <Link key={"Logout"} to={"/auth/login"}>
+                <Button
+                    onClick={() => {
+                        dispatch(logoutAction());
+                        logout();
+                    }}
+                    sx={{my: 2, color: 'white', display: 'block'}}
+                >
+                    Logout
+                </Button>
+            </Link>
+        ];
+    }
 
     return (
-        <AppBar position="static">
+        <AppBar className={theme === Theme.LIGHT ? classes.light : undefined} position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
+                    <NavLink to={"/"}>
+                        <IconButton component={"div"}>
+                            <img className={classes.logo} src={logo} alt={"Lilly021"}/>
+                        </IconButton>
+                    </NavLink>
                     <Box sx={{flexGrow: 1, display: {xs: 'flex', sm: 'none'}, justifyContent: "flex-end"}}>
                         <IconButton
                             size="large"
@@ -58,27 +110,13 @@ export const MainNavbar: React.FC = () => {
                                 display: {xs: 'block', sm: 'none'},
                             }}
                         >
-                            {pages.map((page, index) => (
-                                <NavLink key={page} to={routes[index]}>
-                                    <MenuItem onClick={handleCloseNavMenu}>
-                                        <Typography textAlign="center">{page}</Typography>
-                                    </MenuItem>
-                                </NavLink>
-                            ))}
+                            {menuItems()}
                         </Menu>
                     </Box>
                     <Box sx={{flexGrow: 1, display: {xs: 'none', sm: 'flex'}, justifyContent: "flex-end"}}>
-                        {pages.map((page, index) => (
-                            <NavLink key={page} to={routes[index]}>
-                                <Button
-                                    onClick={handleCloseNavMenu}
-                                    sx={{my: 2, color: 'white', display: 'block'}}
-                                >
-                                    {page}
-                                </Button>
-                            </NavLink>
-                        ))}
+                        {navLinks()}
                     </Box>
+                    <ThemeToggle/>
                 </Toolbar>
             </Container>
         </AppBar>

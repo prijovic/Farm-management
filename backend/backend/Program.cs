@@ -60,7 +60,10 @@ builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddSingleton(tokenValidationParameters);
+
 builder.Services.AddScoped<SignUpUser>();
+builder.Services.AddScoped<LoginUser>();
+builder.Services.AddScoped<GenerateJwt>();
 
 var app = builder.Build();
 

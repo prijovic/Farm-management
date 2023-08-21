@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {AuthMode} from "./AuthMode";
-import {Alert, AlertColor, Button, Card, CardActions, CardContent, CardHeader, Snackbar, Stack} from "@mui/material";
+import {Button, Card, CardActions, CardContent, CardHeader, Stack} from "@mui/material";
 import {InputField} from "../UI/InputField";
 import {PasswordInput} from "../UI/PasswordInput";
 import {CustomDatePicker} from "../UI/CustomDatePicker";
@@ -8,8 +8,12 @@ import {toTitleCase} from "../../utils/toTitleCase";
 import {AddressInput} from "../UI/AddressInput";
 import {Address} from "../../model/entities/Address";
 import {Moment} from "moment";
-import {sendSignUpRequest} from "../../http/auth";
+import {sendLoginRequest, sendSignUpRequest} from "../../http/auth";
 import {useNavigate} from "react-router-dom";
+import {setToken} from "../../utils/auth";
+import {useAppDispatch} from "../../store/hooks";
+import {login} from "../../store/features/authSlice";
+import {NotificationType, showNotification} from "../../store/features/uiSlice";
 
 export enum AuthInputs {
     EMAIL,
@@ -58,13 +62,11 @@ export const AuthForm: React.FC<AuthFormProps> = ({mode}) => {
     const [farmName, setFarmName] = useState('');
     const [farmNameIsValid, setFarmNameIsValid] = useState(false);
 
-    const [notificationMessage, setNotificationMessage] = useState<string | null>(null);
-    const [notificationType, setNotificationType] = useState<AlertColor | null>(null);
-
     const formIsValid: boolean = (mode === AuthMode.LOGIN) ? emailIsValid && passwordIsValid :
         emailIsValid && passwordIsValid && nameIsValid && surnameIsValid && birthDateIsValid && !!birthDate && addressIsValid && !!address && farmNameIsValid;
 
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
 
     const changeHandler = (inputType: AuthInputs) => {
         let methodToExecute: (value: any) => void;
@@ -120,7 +122,18 @@ export const AuthForm: React.FC<AuthFormProps> = ({mode}) => {
         event.preventDefault();
         if (formIsValid) {
             if (mode === AuthMode.LOGIN) {
-
+                sendLoginRequest({
+                    email,
+                    password
+                })
+                    .then((response) => {
+                        setToken(response.data);
+                        dispatch(login());
+                        navigate("/", {replace: true});
+                    })
+                    .catch((res) => {
+                        dispatch(showNotification({message: res.response.data.error, type: NotificationType.ERROR}))
+                    });
             } else if (mode === AuthMode.SIGN_UP) {
                 sendSignUpRequest({
                     email,
@@ -132,8 +145,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({mode}) => {
                     farmName
                 })
                     .then(() => {
-                        setNotificationMessage("Successful sign up!");
-                        setNotificationType("success");
+                        dispatch(showNotification({message: "Successful sign up!", type: NotificationType.SUCCESS}))
                         setEmail("");
                         setEmailIsValid(false);
                         setPassword("");
@@ -141,83 +153,66 @@ export const AuthForm: React.FC<AuthFormProps> = ({mode}) => {
                         navigate("/auth/login", {replace: true});
                     })
                     .catch((res) => {
-                        setNotificationMessage(res.response.data.error);
-                        setNotificationType("error");
+                        dispatch(showNotification({message: res.response.data.error, type: NotificationType.ERROR}))
                     })
             }
         }
     }
 
-    const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setNotificationMessage(null);
-    };
 
     return (
-        <>
-            <Snackbar anchorOrigin={{vertical: "top", horizontal: "center"}} open={!!notificationMessage}
-                      autoHideDuration={3000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity={notificationType!}
-                       sx={{width: '100%'}}>
-                    {notificationMessage}
-                </Alert>
-            </Snackbar>
-            <Card className={"form"} sx={{maxWidth: {xs: "80%", sm: "500px"},}}>
-                <CardHeader
-                    title={toTitleCase(mode)}
-                    titleTypographyProps={{component: "h1", variant: "h4"}}
-                    subheader={`Please fill out your information to ${mode}.`}
-                    subheaderTypographyProps={{component: "p", variant: "subtitle1", gutterBottom: true}}
-                />
-                <form onSubmit={handleFormSubmit}>
-                    <CardContent>
-                        <Stack spacing={6}>
-                            <Stack spacing={2} direction={'column'}>
-                                <InputField label={"E-mail"} type={"email"} id={"email"} value={email}
-                                            onChange={changeHandler(AuthInputs.EMAIL)} required={true}
-                                            onValidityChange={validityHandler(AuthInputs.EMAIL)}
-                                            validators={emailValidator}/>
-                                <PasswordInput label={"Password"} id={"password"} value={password}
-                                               onChange={changeHandler(AuthInputs.PASSWORD)} required={true}
-                                               onValidityChange={validityHandler(AuthInputs.PASSWORD)}
-                                               validators={passwordValidator}/>
-                            </Stack>
-                            {mode === AuthMode.SIGN_UP && <>
-                              <Stack spacing={2} direction={'column'}>
-                                <InputField label={"Name"} type={"text"} id={"name"} value={name}
-                                            onChange={changeHandler(AuthInputs.NAME)} required={true}
-                                            onValidityChange={validityHandler(AuthInputs.NAME)}
-                                            validators={nameValidator('Name')}/>
-                                <InputField label={"Surname"} type={"text"} id={"surname"} value={surname}
-                                            onChange={changeHandler(AuthInputs.SURNAME)} required={true}
-                                            onValidityChange={validityHandler(AuthInputs.SURNAME)}
-                                            validators={nameValidator('Surname')}/>
-                                <CustomDatePicker label={"Birthday"} value={birthDate}
-                                                  onValidityChange={(value: boolean) => setBirthDateIsValid(value)}
-                                                  onChange={(value: any) => (setBirthDate(value))}/>
-                                <AddressInput id={"address"} label={"Address"}
-                                              value={address}
-                                              onChange={changeHandler(AuthInputs.ADDRESS)}
-                                              onValidityChange={(value: boolean) => setAddressIsValid(value)}/>
-                              </Stack>
-                              <Stack spacing={2} direction={'column'}>
-                                <InputField label={"Farm Name"} type={"text"} id={"farmName"} value={farmName}
-                                            onChange={changeHandler(AuthInputs.FARM_NAME)} required={true}
-                                            onValidityChange={validityHandler(AuthInputs.FARM_NAME)}
-                                            validators={nameValidator('Farm name')}/>
-                              </Stack>
-                            </>}
+        <Card className={"form"} sx={{maxWidth: {xs: "80%", sm: "500px"},}}>
+            <CardHeader
+                title={toTitleCase(mode)}
+                titleTypographyProps={{component: "h1", variant: "h4"}}
+                subheader={`Please fill out your information to ${mode}.`}
+                subheaderTypographyProps={{component: "p", variant: "subtitle1", gutterBottom: true}}
+            />
+            <form onSubmit={handleFormSubmit}>
+                <CardContent>
+                    <Stack spacing={6}>
+                        <Stack spacing={2} direction={'column'}>
+                            <InputField label={"E-mail"} type={"email"} id={"email"} value={email}
+                                        onChange={changeHandler(AuthInputs.EMAIL)} required={true}
+                                        onValidityChange={validityHandler(AuthInputs.EMAIL)}
+                                        validators={emailValidator}/>
+                            <PasswordInput label={"Password"} id={"password"} value={password}
+                                           onChange={changeHandler(AuthInputs.PASSWORD)} required={true}
+                                           onValidityChange={validityHandler(AuthInputs.PASSWORD)}
+                                           validators={passwordValidator}/>
                         </Stack>
-                    </CardContent>
-                    <CardActions style={{justifyContent: "center", marginTop: "16px"}}>
-                        <Button size={"large"} type="submit" sx={{width: {xs: "100%", sm: "fit-content"}}}
-                                variant={"contained"}>{mode}</Button>
-                    </CardActions>
-                </form>
-            </Card>
-        </>
+                        {mode === AuthMode.SIGN_UP && <>
+                          <Stack spacing={2} direction={'column'}>
+                            <InputField label={"Name"} type={"text"} id={"name"} value={name}
+                                        onChange={changeHandler(AuthInputs.NAME)} required={true}
+                                        onValidityChange={validityHandler(AuthInputs.NAME)}
+                                        validators={nameValidator('Name')}/>
+                            <InputField label={"Surname"} type={"text"} id={"surname"} value={surname}
+                                        onChange={changeHandler(AuthInputs.SURNAME)} required={true}
+                                        onValidityChange={validityHandler(AuthInputs.SURNAME)}
+                                        validators={nameValidator('Surname')}/>
+                            <CustomDatePicker label={"Birthday"} value={birthDate}
+                                              onValidityChange={(value: boolean) => setBirthDateIsValid(value)}
+                                              onChange={(value: any) => (setBirthDate(value))}/>
+                            <AddressInput id={"address"} label={"Address"}
+                                          value={address}
+                                          onChange={changeHandler(AuthInputs.ADDRESS)}
+                                          onValidityChange={(value: boolean) => setAddressIsValid(value)}/>
+                          </Stack>
+                          <Stack spacing={2} direction={'column'}>
+                            <InputField label={"Farm Name"} type={"text"} id={"farmName"} value={farmName}
+                                        onChange={changeHandler(AuthInputs.FARM_NAME)} required={true}
+                                        onValidityChange={validityHandler(AuthInputs.FARM_NAME)}
+                                        validators={nameValidator('Farm name')}/>
+                          </Stack>
+                        </>}
+                    </Stack>
+                </CardContent>
+                <CardActions style={{justifyContent: "center", marginTop: "16px"}}>
+                    <Button size={"large"} type="submit" sx={{width: {xs: "100%", sm: "fit-content"}}}
+                            variant={"contained"}>{mode}</Button>
+                </CardActions>
+            </form>
+        </Card>
     );
 };
