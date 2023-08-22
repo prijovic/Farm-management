@@ -1,6 +1,7 @@
 ﻿using backend.DTOs.Request.Parcel;
 using backend.DTOs.Response;
 using backend.Services.Parcel;
+using backend.Services.ParcelOperation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,19 +17,27 @@ public class ParcelController : ControllerBase
     private readonly CreateParcel _createParcel;
     private readonly UpdateParcel _updateParcel;
     private readonly DeleteParcel _deleteParcel;
+    private readonly GetAllParcelOperations _getAllParcelOperations;
 
-    public ParcelController(GetAllUserParcels getAllUserParcels, CreateParcel createParcel, UpdateParcel updateParcel, DeleteParcel deleteParcel)
+    public ParcelController(GetAllUserParcels getAllUserParcels, CreateParcel createParcel, UpdateParcel updateParcel, DeleteParcel deleteParcel, GetAllParcelOperations getAllParcelOperations)
     {
         _getAllUserParcels = getAllUserParcels;
         _createParcel = createParcel;
         _updateParcel = updateParcel;
         _deleteParcel = deleteParcel;
+        _getAllParcelOperations = getAllParcelOperations;
     }
     
     [HttpGet("all")]
     public async Task<List<ParcelResponse>> GetAllUserParcels()
     {
         return await _getAllUserParcels.Execute(Request);
+    }
+
+    [HttpGet("{id:guid}/operations")]
+    public async Task<List<ParcelOperationResponse>> GetAllParcelsOperations([FromRoute] Guid id)
+    {
+        return await _getAllParcelOperations.Execute(id);
     }
 
     [HttpPost]

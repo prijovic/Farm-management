@@ -4,6 +4,7 @@ using backend.Database;
 using backend.Models;
 using backend.Services.auth;
 using backend.Services.Parcel;
+using backend.Services.ParcelOperation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -72,6 +73,7 @@ builder.Services.AddScoped<GetAllUserParcels>();
 builder.Services.AddScoped<CreateParcel>();
 builder.Services.AddScoped<UpdateParcel>();
 builder.Services.AddScoped<DeleteParcel>();
+builder.Services.AddScoped<GetAllParcelOperations>();
 
 var app = builder.Build();
 
