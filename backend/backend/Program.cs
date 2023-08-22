@@ -76,6 +76,7 @@ builder.Services.AddScoped<GetLoggedInUser>();
 builder.Services.AddScoped<GetAllUserParcels>();
 builder.Services.AddScoped<CreateParcel>();
 builder.Services.AddScoped<UpdateParcel>();
+builder.Services.AddScoped<DeleteParcel>();
 
 var app = builder.Build();
 

@@ -12,12 +12,14 @@ public class ParcelController : ControllerBase
     private readonly GetAllUserParcels _getAllUserParcels;
     private readonly CreateParcel _createParcel;
     private readonly UpdateParcel _updateParcel;
+    private readonly DeleteParcel _deleteParcel;
 
-    public ParcelController(GetAllUserParcels getAllUserParcels, CreateParcel createParcel, UpdateParcel updateParcel)
+    public ParcelController(GetAllUserParcels getAllUserParcels, CreateParcel createParcel, UpdateParcel updateParcel, DeleteParcel deleteParcel)
     {
         _getAllUserParcels = getAllUserParcels;
         _createParcel = createParcel;
         _updateParcel = updateParcel;
+        _deleteParcel = deleteParcel;
     }
     
     [HttpGet("all")]
@@ -36,5 +38,11 @@ public class ParcelController : ControllerBase
     public async Task<ParcelResponse> UpdateParcel([FromRoute] Guid id, [FromBody] CUParcelRequest updateParcelRequest)
     {
         return await _updateParcel.Execute(id, updateParcelRequest);
+    }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<Guid> DeleteParcel([FromRoute] Guid id)
+    {
+        return await _deleteParcel.Execute(id);
     }
 }
