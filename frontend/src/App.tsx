@@ -13,8 +13,8 @@ import {selectTheme} from "./store/features/uiSlice";
 import {Notification} from "./components/Notification";
 import {ParcelsPage} from "./pages/ParcelsPage";
 import {ParcelEditPage} from "./pages/ParcelEditPage";
-import {ParcelDetailsPage} from "./pages/ParcelDetailsPage";
 import {ProtectedRoute} from "./router/ProtectedRoute";
+import {ParcelDetailsPage} from "./pages/ParcelDetailsPage";
 
 const router = createBrowserRouter(
     createRoutesFromElements(

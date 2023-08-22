@@ -2,6 +2,7 @@ import {Parcel} from "../model/entities/Parcel";
 import axios from "axios";
 import {config} from "../config";
 import {getToken} from "../utils/auth";
+import {ParcelOperation} from "../model/entities/ParcelOperation";
 
 interface ParcelEditRequest {
     name: string;
@@ -15,6 +16,14 @@ export const getParcels = () => {
             "Authorization": "Bearer " + getToken()
         }
     });
+}
+
+export const getParcelOperations = (id: string) => {
+    return axios.get<ParcelOperation[]>(config.api + "parcel/" + id + "/operations", {
+        headers: {
+            "Authorization": "Bearer " + getToken()
+        }
+    })
 }
 
 export const sendCreateParcelRequest = (body: ParcelEditRequest) => {

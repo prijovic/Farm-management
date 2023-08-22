@@ -14,7 +14,7 @@ export const ParcelCard: React.FC<{ parcel: Parcel }> = ({parcel}) => {
                     <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
                         {toDateOutput(parcel.creationDate)}
                     </Typography>
-                    <Typography variant="h5" component="div">
+                    <Typography variant="h4" component="div">
                         {parcel.name}
                     </Typography>
                     <Typography sx={{mb: 1.5}} color="text.secondary">
