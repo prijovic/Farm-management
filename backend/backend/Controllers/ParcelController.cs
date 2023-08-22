@@ -1,10 +1,13 @@
 ﻿using backend.DTOs.Request.Parcel;
 using backend.DTOs.Response;
 using backend.Services.Parcel;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers;
 
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 [ApiController]
 [Route("parcel")]
 public class ParcelController : ControllerBase

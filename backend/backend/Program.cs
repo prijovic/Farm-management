@@ -47,11 +47,6 @@ builder.Services.AddAuthentication(options =>
         options.TokenValidationParameters = tokenValidationParameters;
     });
 
-builder.Services.AddAuthorization(options =>
-{
-    options.DefaultPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-});
-
 builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
     {
         options.SignIn.RequireConfirmedAccount = false;
@@ -94,8 +89,8 @@ app.UseCors(x =>
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
 
 app.AddGlobalErrorHandler();
 
