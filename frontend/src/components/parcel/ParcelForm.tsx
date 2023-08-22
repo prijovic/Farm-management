@@ -1,13 +1,17 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {Button, Card, CardActions, CardContent, CardHeader, Stack} from "@mui/material";
 import {InputField} from "../UI/InputField";
-import {useAppDispatch} from "../../store/hooks";
+import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import {NotificationType, showNotification} from "../../store/features/uiSlice";
-import {sendCreateParcelRequest} from "../../http/parcel";
+import {sendCreateParcelRequest, sendUpdateParcelRequest} from "../../http/parcel";
+import {Parcel} from "../../model/entities/Parcel";
+import {selectParcel, updateParcel} from "../../store/features/parcelSlice";
 
 export const ParcelForm: React.FC = () => {
     const {id} = useParams();
+    const [parcel, setParcel] = useState<Parcel | undefined>(useAppSelector(selectParcel(id)));
+
     const title = id ? 'Parcel Edit' : 'New Parcel';
     const subheader = id ? '' : 'Please fill out information to add new parcel.';
     const buttonText = id ? 'Save Changes' : 'Add Parcel';
@@ -30,26 +34,50 @@ export const ParcelForm: React.FC = () => {
     };
     const [sizeIsValid, setSizeIsValid] = useState(false);
 
-
-    const formIsValid: boolean = nameIsValid && numberIsValid && sizeIsValid;
+    const formIsValid: boolean = (nameIsValid && numberIsValid && sizeIsValid && !id) ||
+        ((name !== parcel?.name || number != parcel.number || size != parcel.size) && !!id);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        if (parcel) {
+            setName(parcel.name);
+            setSize(parcel.size);
+            setNumber(parcel.number);
+        }
+    }, [parcel]);
 
     const handleFormSubmit: React.FormEventHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (formIsValid) {
+            const body = {
+                name,
+                size,
+                number
+            };
             if (id) {
-                // EDIT PARCEL
+                dispatch(showNotification({
+                    message: "Saving parcel changes...",
+                    type: NotificationType.INFO
+                }));
+                sendUpdateParcelRequest(id, body)
+                    .then((response) => {
+                        dispatch(showNotification({
+                            message: "Successful parcel update!",
+                            type: NotificationType.SUCCESS
+                        }))
+                        dispatch(updateParcel(response.data));
+                        navigate("/parcel/" + id, {replace: true});
+                    })
+                    .catch((res) => {
+                        dispatch(showNotification({message: res.response.data.error, type: NotificationType.ERROR}))
+                    });
             } else {
                 dispatch(showNotification({
                     message: "Parcel creation request has been sent.",
                     type: NotificationType.INFO
                 }));
-                sendCreateParcelRequest({
-                    name,
-                    size,
-                    number
-                })
+                sendCreateParcelRequest(body)
                     .then(() => {
                         dispatch(showNotification({
                             message: "Successful parcel creation!",
@@ -98,7 +126,8 @@ export const ParcelForm: React.FC = () => {
                     </Stack>
                 </CardContent>
                 <CardActions style={{justifyContent: "center", marginTop: "16px"}}>
-                    <Button size={"large"} type="submit" sx={{width: {xs: "100%", sm: "fit-content"}}}
+                    <Button disabled={!formIsValid && !!id} size={"large"} type="submit"
+                            sx={{width: {xs: "100%", sm: "fit-content"}}}
                             variant={"contained"}>{buttonText}</Button>
                 </CardActions>
             </form>

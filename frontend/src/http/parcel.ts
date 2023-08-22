@@ -24,3 +24,11 @@ export const sendCreateParcelRequest = (body: ParcelEditRequest) => {
         }
     })
 }
+
+export const sendUpdateParcelRequest = (id: string, body: ParcelEditRequest) => {
+    return axios.put<Parcel>(config.api + "parcel/" + id, body, {
+        headers: {
+            "Authorization": "Bearer " + getToken()
+        }
+    });
+}

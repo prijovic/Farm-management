@@ -12,8 +12,8 @@ import {useAppSelector} from "./store/hooks";
 import {selectTheme} from "./store/features/uiSlice";
 import {Notification} from "./components/Notification";
 import {ParcelsPage} from "./pages/ParcelsPage";
-import {ParcelDetailsPage} from "./pages/ParcelDetailsPage";
 import {ParcelEditPage} from "./pages/ParcelEditPage";
+import {ParcelDetailsPage} from "./pages/ParcelDetailsPage";
 
 const router = createBrowserRouter(
     createRoutesFromElements(

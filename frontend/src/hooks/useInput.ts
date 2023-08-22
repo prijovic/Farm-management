@@ -26,8 +26,7 @@ export const useInput: (args: UseInputArgs) => UseInputRes = ({
     const isValid = !isTouched || error === "";
 
     const handleOnChange = (value: any) => {
-        console.log(value);
-        console.log(validators);
+
         if (!isTouched) {
             setIsTouched(true);
         }
