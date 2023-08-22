@@ -16,7 +16,7 @@ public static class GlobalExceptionHandler
             statusCode = 403;
         else if (exceptionType == typeof(NotFoundException))
             statusCode = 404;
-        else if (exceptionType == typeof(UserExistsException))
+        else if (exceptionType == typeof(UserExistsException) || exceptionType == typeof(ParcelExistsException)) 
             statusCode = 409;
         else if (exceptionType == typeof(InvalidTokenException))
             statusCode = 498;

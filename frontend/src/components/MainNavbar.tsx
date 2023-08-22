@@ -10,8 +10,10 @@ import classes from "./MainNavbar.module.css";
 import {ThemeToggle} from "./ThemeToggle";
 import {selectTheme, Theme} from "../store/features/uiSlice";
 
-const pages = ['Login', 'Sign Up'];
-const routes = ['/auth/login', '/auth/signUp'];
+const unauthenticatedPages = ['Login', 'Sign Up'];
+const authenticatedPages = ['Parcels'];
+const unauthenticatedRoutes = ['/auth/login', '/auth/signUp'];
+const authenticatedRoutes = ['/parcel/all'];
 
 export const MainNavbar: React.FC = () => {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -27,28 +29,36 @@ export const MainNavbar: React.FC = () => {
         setAnchorElNav(null);
     };
 
-    const menuItems = () => {
-        return !isAuthenticated ? pages.map((page, index) => (
+    const mapMenuItems = (pages: string[], routes: string[]) => {
+        return pages.map((page, index) => (
             <NavLink key={page} to={routes[index]}>
                 <MenuItem onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
             </NavLink>
-        )) : [
-            <Link key={"Logout"} to={"/auth/login"}>
-                <MenuItem onClick={() => {
-                    handleCloseNavMenu();
-                    logout();
-                    dispatch(logoutAction());
-                }}>
-                    <Typography textAlign="center">Logout</Typography>
-                </MenuItem>
-            </Link>
-        ];
+        ))
     }
 
-    const navLinks = () => {
-        return !isAuthenticated ? pages.map((page, index) => (
+    const authenticatedMenuItems = () => {
+        const menuItems = mapMenuItems(authenticatedPages, authenticatedRoutes);
+        menuItems.push((<Link key={"Logout"} to={"/auth/login"}>
+            <MenuItem onClick={() => {
+                handleCloseNavMenu();
+                logout();
+                dispatch(logoutAction());
+            }}>
+                <Typography textAlign="center">Logout</Typography>
+            </MenuItem>
+        </Link>));
+        return menuItems;
+    }
+
+    const menuItems = () => {
+        return !isAuthenticated ? mapMenuItems(unauthenticatedPages, unauthenticatedRoutes) : authenticatedMenuItems();
+    }
+
+    const mapNavLinks = (pages: string[], routes: string[]) => {
+        return pages.map((page, index) => (
             <NavLink key={page} to={routes[index]}>
                 <Button
                     onClick={handleCloseNavMenu}
@@ -57,19 +67,27 @@ export const MainNavbar: React.FC = () => {
                     {page}
                 </Button>
             </NavLink>
-        )) : [
-            <Link key={"Logout"} to={"/auth/login"}>
-                <Button
-                    onClick={() => {
-                        dispatch(logoutAction());
-                        logout();
-                    }}
-                    sx={{my: 2, color: 'white', display: 'block'}}
-                >
-                    Logout
-                </Button>
-            </Link>
-        ];
+        ))
+    }
+
+    const authenticatedNavLinks = () => {
+        const menuItems = mapNavLinks(authenticatedPages, authenticatedRoutes);
+        menuItems.push((<Link key={"Logout"} to={"/auth/login"}>
+            <Button
+                onClick={() => {
+                    dispatch(logoutAction());
+                    logout();
+                }}
+                sx={{my: 2, color: 'white', display: 'block'}}
+            >
+                Logout
+            </Button>
+        </Link>));
+        return menuItems;
+    }
+
+    const navLinks = () => {
+        return !isAuthenticated ? mapNavLinks(unauthenticatedPages, unauthenticatedRoutes) : authenticatedNavLinks();
     }
 
     return (

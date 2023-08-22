@@ -3,7 +3,9 @@ using backend.Configurations;
 using backend.Database;
 using backend.Models;
 using backend.Services.auth;
+using backend.Services.Parcel;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -64,6 +66,12 @@ builder.Services.AddSingleton(tokenValidationParameters);
 builder.Services.AddScoped<SignUpUser>();
 builder.Services.AddScoped<LoginUser>();
 builder.Services.AddScoped<GenerateJwt>();
+builder.Services.AddScoped<GetLoggedInUser>();
+
+builder.Services.AddScoped<GetAllUserParcels>();
+builder.Services.AddScoped<CreateParcel>();
+builder.Services.AddScoped<UpdateParcel>();
+builder.Services.AddScoped<DeleteParcel>();
 
 var app = builder.Build();
 
@@ -81,8 +89,8 @@ app.UseCors(x =>
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
 
 app.AddGlobalErrorHandler();
 
