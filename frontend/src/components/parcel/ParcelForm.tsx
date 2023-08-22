@@ -4,9 +4,9 @@ import {Button, Card, CardActions, CardContent, CardHeader, Stack} from "@mui/ma
 import {InputField} from "../UI/InputField";
 import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import {NotificationType, showNotification} from "../../store/features/uiSlice";
-import {sendCreateParcelRequest, sendUpdateParcelRequest} from "../../http/parcel";
+import {sendCreateParcelRequest, sendDeleteParcelRequest, sendUpdateParcelRequest} from "../../http/parcel";
 import {Parcel} from "../../model/entities/Parcel";
-import {selectParcel, updateParcel} from "../../store/features/parcelSlice";
+import {deleteParcel as deleteParcelAction, selectParcel, updateParcel} from "../../store/features/parcelSlice";
 
 export const ParcelForm: React.FC = () => {
     const {id} = useParams();
@@ -92,6 +92,27 @@ export const ParcelForm: React.FC = () => {
         }
     }
 
+    const deleteParcel = () => {
+        if (id) {
+            dispatch(showNotification({
+                message: "Parcel deletion request has been sent.",
+                type: NotificationType.INFO
+            }));
+            sendDeleteParcelRequest(id)
+                .then((response) => {
+                    dispatch(showNotification({
+                        message: "Successful parcel deletion!",
+                        type: NotificationType.SUCCESS
+                    }))
+                    dispatch(deleteParcelAction(response.data));
+                    navigate("/parcel/all", {replace: true});
+                })
+                .catch((res) => {
+                    dispatch(showNotification({message: res.response.data.error, type: NotificationType.ERROR}))
+                })
+        }
+    }
+
     return (
         <Card className={"form"} sx={{maxWidth: {xs: "80%", sm: "500px"},}}>
             <CardHeader
@@ -125,10 +146,15 @@ export const ParcelForm: React.FC = () => {
                         </Stack>
                     </Stack>
                 </CardContent>
-                <CardActions style={{justifyContent: "center", marginTop: "16px"}}>
+                <CardActions
+                    style={{justifyContent: "center", marginTop: "16px", gap: "1rem"}}>
                     <Button disabled={!formIsValid && !!id} size={"large"} type="submit"
                             sx={{width: {xs: "100%", sm: "fit-content"}}}
                             variant={"contained"}>{buttonText}</Button>
+                    {id && <Button size={"large"} type="button"
+                                   onClick={deleteParcel}
+                                   sx={{width: {xs: "100%", sm: "fit-content"}}}
+                                   variant={"contained"} color={"error"}>Delete Parcel</Button>}
                 </CardActions>
             </form>
         </Card>

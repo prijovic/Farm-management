@@ -24,11 +24,14 @@ export const parcelSlice = createSlice({
                 }
                 return parcel;
             })
+        },
+        deleteParcel: (state, action: PayloadAction<string>) => {
+            state.parcels = state.parcels.filter(parcel => parcel.id !== action.payload);
         }
     }
 });
 
-export const {setParcels, updateParcel} = parcelSlice.actions;
+export const {setParcels, updateParcel, deleteParcel} = parcelSlice.actions;
 
 export const selectParcels = (state: RootState) => state.parcel.parcels;
 export const selectParcel = (id: string | undefined) => (state: RootState) => id ? state.parcel.parcels.find(parcel => parcel.id === id) : undefined;
