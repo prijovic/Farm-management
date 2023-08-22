@@ -21,9 +21,9 @@ public class CreateParcel
         _getLoggedInUser = getLoggedInUser;
     }
 
-    public async Task<ParcelResponse> Execute(HttpRequest request, CreateParcelRequest createParcelRequest)
+    public async Task<ParcelResponse> Execute(HttpRequest request, CUParcelRequest cuParcelRequest)
     {
-        var existingParcel = await _context.Parcels.FirstOrDefaultAsync((p) => p.Number == createParcelRequest.Number);
+        var existingParcel = await _context.Parcels.FirstOrDefaultAsync((p) => p.Number == cuParcelRequest.Number);
         if (existingParcel != null)
         {
             throw new ParcelExistsException();
@@ -31,7 +31,7 @@ public class CreateParcel
         
         var user = await _getLoggedInUser.Execute(request);
 
-        var parcel = _mapper.Map<Models.Parcel>(createParcelRequest);
+        var parcel = _mapper.Map<Models.Parcel>(cuParcelRequest);
         parcel.User = user;
         parcel.UserId = user.Id;
         
