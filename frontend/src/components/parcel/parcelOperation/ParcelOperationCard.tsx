@@ -1,7 +1,7 @@
 import React from "react";
-import {ParcelOperation} from "../../model/entities/ParcelOperation";
+import {ParcelOperation} from "../../../model/entities/ParcelOperation";
 import {Card, CardContent, Typography} from "@mui/material";
-import {toDateOutput} from "../../utils/toDateOutput";
+import {toDateOutput} from "../../../utils/toDateOutput";
 import {Draggable} from "react-beautiful-dnd";
 
 export const ParcelOperationCard: React.FC<{ parcelOperation: ParcelOperation, index: number }> = ({

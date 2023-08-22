@@ -34,6 +34,9 @@ export const parcelSlice = createSlice({
         setParcelOperations: (state, action: PayloadAction<ParcelOperation[]>) => {
             state.parcelOperations = action.payload;
         },
+        addParcelOperation: (state, action: PayloadAction<ParcelOperation>) => {
+            state.parcelOperations.push(action.payload);
+        },
         updateParcelOperationStatus: (state, action: PayloadAction<{ id: string, status: number }>) => {
             state.parcelOperations = state.parcelOperations.map(operation => {
                 if (operation.id === action.payload.id) {
@@ -53,7 +56,8 @@ export const {
     updateParcel,
     deleteParcel,
     setParcelOperations,
-    updateParcelOperationStatus
+    updateParcelOperationStatus,
+    addParcelOperation
 } = parcelSlice.actions;
 
 export const selectParcels = (state: RootState) => state.parcel.parcels;

@@ -1,5 +1,5 @@
 import React from "react";
-import {ParcelOperation} from "../../model/entities/ParcelOperation";
+import {ParcelOperation} from "../../../model/entities/ParcelOperation";
 import {Stack, Typography} from "@mui/material";
 import {ParcelOperationCard} from "./ParcelOperationCard";
 import {Droppable} from "react-beautiful-dnd";

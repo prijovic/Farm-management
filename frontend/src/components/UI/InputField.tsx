@@ -12,7 +12,9 @@ export const InputField: React.FC<InputProps> = ({
                                                      required,
                                                      onChange,
                                                      onValidityChange,
-                                                     inputProps
+                                                     inputProps,
+                                                     rows,
+                                                     multiline
                                                  }) => {
     const {isValid, error, handleOnChange} = useInput({required, label, validators, onChange, onValidityChange});
 
@@ -24,6 +26,8 @@ export const InputField: React.FC<InputProps> = ({
                    helperText={!isValid && error}
                    onChange={(event) => handleOnChange(event.target.value)}
                    inputProps={inputProps}
+                   multiline={multiline}
+                   rows={rows}
         ></TextField>
     );
 };

@@ -10,6 +10,12 @@ interface ParcelEditRequest {
     number: number;
 }
 
+interface ParcelOperationEditRequest {
+    name: string;
+    description: string;
+    status?: number;
+}
+
 export const getParcels = () => {
     return axios.get<Parcel[]>(config.api + "parcel/all", {
         headers: {
@@ -23,7 +29,7 @@ export const getParcelOperations = (id: string) => {
         headers: {
             "Authorization": "Bearer " + getToken()
         }
-    })
+    });
 }
 
 export const sendCreateParcelRequest = (body: ParcelEditRequest) => {
@@ -31,7 +37,15 @@ export const sendCreateParcelRequest = (body: ParcelEditRequest) => {
         headers: {
             "Authorization": "Bearer " + getToken()
         }
-    })
+    });
+}
+
+export const sendCreateParcelOperationRequest = (id: string, body: ParcelOperationEditRequest) => {
+    return axios.post<ParcelOperation>(config.api + "parcel/" + id + "/operations", body, {
+        headers: {
+            "Authorization": "Bearer " + getToken()
+        }
+    });
 }
 
 export const sendUpdateParcelRequest = (id: string, body: ParcelEditRequest) => {

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Grid} from "@mui/material";
 import {ParcelDetailsCard} from "../components/parcel/ParcelDetailsCard";
-import {ParcelOperationsContainer} from "../components/parcel/ParcelOperationsContainer";
+import {ParcelOperationsContainer} from "../components/parcel/parcelOperation/ParcelOperationsContainer";
 import {useAppDispatch, useAppSelector} from "../store/hooks";
 import {selectParcel, selectParcelOperations, setParcelOperations} from "../store/features/parcelSlice";
 import {useParams} from "react-router-dom";
