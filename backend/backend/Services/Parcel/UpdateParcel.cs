@@ -30,6 +30,7 @@ public class UpdateParcel
         parcel.Number = updateParcelRequest.Number;
         parcel.Size = updateParcelRequest.Size;
         parcel.Name = updateParcelRequest.Name;
+        parcel.LastEditDate = DateTime.Now;
 
         _context.Parcels.Update(parcel);
         await _context.SaveChangesAsync();
