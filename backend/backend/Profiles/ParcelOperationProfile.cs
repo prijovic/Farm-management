@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using backend.DTOs.Request.Parcel;
 using backend.DTOs.Response;
 using backend.Models;
 
@@ -15,5 +16,9 @@ public class ParcelOperationProfile : Profile
             .ForMember(dest => dest.Name, options => options.MapFrom(src => src.Name))
             .ForMember(dest => dest.Description, options => options.MapFrom(src => src.Description))
             .ForMember(dest => dest.Status, options => options.MapFrom(src => src.Status));
+
+        CreateMap<CUParcelOperationRequest, ParcelOperation>()
+            .ForMember(dest => dest.Name, options => options.MapFrom(src => src.Name))
+            .ForMember(dest => dest.Description, options => options.MapFrom(src => src.Description));
     }
 }
