@@ -6,11 +6,13 @@ import {ParcelOperation} from "../../model/entities/ParcelOperation";
 interface ParcelState {
     parcels: Parcel[];
     parcelOperations: ParcelOperation[];
+    parcelOperationId: string | null;
 }
 
 const initialState: ParcelState = {
     parcels: [],
-    parcelOperations: []
+    parcelOperations: [],
+    parcelOperationId: null
 }
 
 export const parcelSlice = createSlice({
@@ -37,16 +39,16 @@ export const parcelSlice = createSlice({
         addParcelOperation: (state, action: PayloadAction<ParcelOperation>) => {
             state.parcelOperations.push(action.payload);
         },
-        updateParcelOperationStatus: (state, action: PayloadAction<{ id: string, status: number }>) => {
+        updateParcelOperation: (state, action: PayloadAction<ParcelOperation>) => {
             state.parcelOperations = state.parcelOperations.map(operation => {
                 if (operation.id === action.payload.id) {
-                    return {
-                        ...operation,
-                        status: action.payload.status
-                    }
+                    return action.payload;
                 }
                 return operation;
             })
+        },
+        setParcelOperationId: (state, action: PayloadAction<string>) => {
+            state.parcelOperationId = action.payload;
         }
     }
 });
@@ -56,13 +58,15 @@ export const {
     updateParcel,
     deleteParcel,
     setParcelOperations,
-    updateParcelOperationStatus,
-    addParcelOperation
+    updateParcelOperation,
+    addParcelOperation,
+    setParcelOperationId
 } = parcelSlice.actions;
 
 export const selectParcels = (state: RootState) => state.parcel.parcels;
 export const selectParcel = (id: string | undefined) => (state: RootState) => id ? state.parcel.parcels.find(parcel => parcel.id === id) : undefined;
 
 export const selectParcelOperations = (state: RootState) => state.parcel.parcelOperations;
+export const selectParcelOperation = (state: RootState) => state.parcel.parcelOperations.find(po => po.id === state.parcel.parcelOperationId);
 
 export default parcelSlice.reducer;

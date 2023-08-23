@@ -15,7 +15,7 @@ export const ParcelOperationsContainerColumn: React.FC<{ name: string, parcelOpe
             </Typography>
             <Droppable droppableId={name}>
                 {(provided, snapshot) => <Stack
-                    style={snapshot.isDraggingOver ? {backgroundColor: "lightgray"} : undefined}
+                    style={{backgroundColor: snapshot.isDraggingOver ? "lightgray" : undefined}}
                     ref={provided.innerRef} spacing={2}>
                     {parcelOperations.map((operation, index) => <ParcelOperationCard key={index}
                                                                                      index={index}

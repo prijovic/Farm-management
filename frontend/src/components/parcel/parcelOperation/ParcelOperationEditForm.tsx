@@ -1,17 +1,18 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Button, Card, CardActions, CardContent, CardHeader, Stack} from "@mui/material";
 import {InputField} from "../../UI/InputField";
-import {sendCreateParcelOperationRequest} from "../../../http/parcel";
+import {sendCreateParcelOperationRequest, sendUpdateParcelOperationRequest} from "../../../http/parcel";
 import {useParams} from "react-router-dom";
-import {NotificationType, showNotification} from "../../../store/features/uiSlice";
-import {useAppDispatch} from "../../../store/hooks";
-import {addParcelOperation} from "../../../store/features/parcelSlice";
+import {NotificationType, showNotification, toggleModalIsOpened} from "../../../store/features/uiSlice";
+import {useAppDispatch, useAppSelector} from "../../../store/hooks";
+import {addParcelOperation, selectParcelOperation, updateParcelOperation} from "../../../store/features/parcelSlice";
 
-export const ParcelOperationEditForm: React.FC<{ closeDialog: () => void }> = ({closeDialog}) => {
+export const ParcelOperationEditForm: React.FC = () => {
     const {id: parcelId} = useParams();
-    const title = "New Operation";
-    const subheader = "Please fill out information to add new operation";
-    const buttonText = "Add Operation";
+    const parcelOperation = useAppSelector(selectParcelOperation);
+    const title = parcelOperation ? "Edit Operation" : "New Operation";
+    const subheader = parcelOperation ? "" : "Please fill out information to add new operation";
+    const buttonText = parcelOperation ? "Save Changes" : "Add Operation";
     const [name, setName] = useState("");
     const [nameIsValid, setNameIsValid] = useState(false);
     const [description, setDescription] = useState("");
@@ -22,36 +23,63 @@ export const ParcelOperationEditForm: React.FC<{ closeDialog: () => void }> = ({
         }
     };
     const dispatch = useAppDispatch();
+    useEffect(() => {
+        if (parcelOperation) {
+            setName(parcelOperation.name);
+            setDescription(parcelOperation.description)
+        }
+    }, [parcelOperation]);
 
-    const formIsValid: boolean = nameIsValid && descriptionIsValid;
+    const formIsValid: boolean = (nameIsValid && descriptionIsValid && !parcelOperation) ||
+        (!!parcelOperation && ((name !== parcelOperation.name && nameIsValid) || (description !== parcelOperation.description && descriptionIsValid)));
 
     const handleFormSubmit: React.FormEventHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (formIsValid) {
             if (parcelId) {
-                dispatch(showNotification({
-                    message: "Operation creation request has been sent.",
-                    type: NotificationType.INFO
-                }));
-                sendCreateParcelOperationRequest(parcelId, {
-                    name,
-                    description
-                })
-                    .then((response) => {
-                        dispatch(showNotification({
-                            message: "Successful operation creation!",
-                            type: NotificationType.SUCCESS
-                        }))
-                        dispatch(addParcelOperation(response.data));
-                        closeDialog();
+                if (!parcelOperation) {
+                    dispatch(showNotification({
+                        message: "Operation creation request has been sent.",
+                        type: NotificationType.INFO
+                    }));
+                    dispatch(toggleModalIsOpened());
+                    sendCreateParcelOperationRequest(parcelId, {
+                        name,
+                        description
                     })
-                    .catch((res) => {
-                        dispatch(showNotification({message: res.response.data.error, type: NotificationType.ERROR}))
+                        .then((response) => {
+                            dispatch(showNotification({
+                                message: "Successful operation creation!",
+                                type: NotificationType.SUCCESS
+                            }))
+                            dispatch(addParcelOperation(response.data));
+                        })
+                        .catch((res) => {
+                            dispatch(showNotification({message: res.response.data.error, type: NotificationType.ERROR}))
+                        })
+                } else {
+                    dispatch(showNotification({
+                        message: "Operation update request has been sent.",
+                        type: NotificationType.INFO
+                    }));
+                    dispatch(toggleModalIsOpened());
+                    sendUpdateParcelOperationRequest(parcelOperation.id, {
+                        name,
+                        description
                     })
+                        .then((response) => {
+                            dispatch(showNotification({
+                                message: "Successful operation update!",
+                                type: NotificationType.SUCCESS
+                            }))
+                            dispatch(updateParcelOperation(response.data));
+                        })
+                        .catch((res) => {
+                            dispatch(showNotification({message: res.response.data.error, type: NotificationType.ERROR}))
+                        })
+                }
             }
         }
-
-
     }
 
     return (
@@ -80,7 +108,7 @@ export const ParcelOperationEditForm: React.FC<{ closeDialog: () => void }> = ({
                 </CardContent>
                 <CardActions
                     style={{justifyContent: "center", marginTop: "16px", gap: "1rem"}}>
-                    <Button disabled={!formIsValid} size={"large"} type="submit"
+                    <Button disabled={!formIsValid && !!parcelOperation} size={"large"} type="submit"
                             sx={{width: {xs: "100%", sm: "fit-content"}}}
                             variant={"contained"}>{buttonText}</Button>
                 </CardActions>

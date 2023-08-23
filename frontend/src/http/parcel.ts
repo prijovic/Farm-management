@@ -56,6 +56,14 @@ export const sendUpdateParcelRequest = (id: string, body: ParcelEditRequest) => 
     });
 }
 
+export const sendUpdateParcelOperationRequest = (id: string, body: ParcelOperationEditRequest) => {
+    return axios.put<ParcelOperation>(config.api + "parcel/operations/" + id, body, {
+        headers: {
+            "Authorization": "Bearer " + getToken()
+        }
+    });
+}
+
 export const sendDeleteParcelRequest = (id: string) => {
     return axios.delete<string>(config.api + "parcel/" + id, {
         headers: {

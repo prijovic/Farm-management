@@ -20,12 +20,14 @@ interface Notification {
 
 interface UiState {
     theme: Theme
-    notification: Notification | null
+    notification: Notification | null,
+    modalIsOpened: boolean,
 }
 
 const initialState: UiState = {
     theme: Theme.DARK,
-    notification: null
+    notification: null,
+    modalIsOpened: false
 }
 
 export const uiSlice = createSlice({
@@ -40,13 +42,17 @@ export const uiSlice = createSlice({
         },
         closeNotification: (state) => {
             state.notification = null;
+        },
+        toggleModalIsOpened: (state) => {
+            state.modalIsOpened = !state.modalIsOpened;
         }
     }
 });
 
-export const {toggleTheme, showNotification, closeNotification} = uiSlice.actions;
+export const {toggleTheme, showNotification, closeNotification, toggleModalIsOpened} = uiSlice.actions;
 
 export const selectTheme = (state: RootState) => state.ui.theme;
 export const selectNotification = (state: RootState) => state.ui.notification;
+export const selectModalIsOpened = (state: RootState) => state.ui.modalIsOpened;
 
 export default uiSlice.reducer;
