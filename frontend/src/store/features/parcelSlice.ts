@@ -49,6 +49,9 @@ export const parcelSlice = createSlice({
         },
         setParcelOperationId: (state, action: PayloadAction<string>) => {
             state.parcelOperationId = action.payload;
+        },
+        deleteParcelOperation: (state, action: PayloadAction<string>) => {
+            state.parcelOperations = state.parcelOperations.filter(operation => operation.id !== action.payload);
         }
     }
 });
@@ -60,7 +63,8 @@ export const {
     setParcelOperations,
     updateParcelOperation,
     addParcelOperation,
-    setParcelOperationId
+    setParcelOperationId,
+    deleteParcelOperation
 } = parcelSlice.actions;
 
 export const selectParcels = (state: RootState) => state.parcel.parcels;

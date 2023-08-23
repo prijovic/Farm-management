@@ -1,11 +1,20 @@
 import React, {useEffect, useState} from "react";
 import {Button, Card, CardActions, CardContent, CardHeader, Stack} from "@mui/material";
 import {InputField} from "../../UI/InputField";
-import {sendCreateParcelOperationRequest, sendUpdateParcelOperationRequest} from "../../../http/parcel";
+import {
+    sendCreateParcelOperationRequest,
+    sendDeleteParcelOperationRequest,
+    sendUpdateParcelOperationRequest
+} from "../../../http/parcel";
 import {useParams} from "react-router-dom";
 import {NotificationType, showNotification, toggleModalIsOpened} from "../../../store/features/uiSlice";
 import {useAppDispatch, useAppSelector} from "../../../store/hooks";
-import {addParcelOperation, selectParcelOperation, updateParcelOperation} from "../../../store/features/parcelSlice";
+import {
+    addParcelOperation,
+    deleteParcelOperation as deleteParcelOperationAction,
+    selectParcelOperation,
+    updateParcelOperation
+} from "../../../store/features/parcelSlice";
 
 export const ParcelOperationEditForm: React.FC = () => {
     const {id: parcelId} = useParams();
@@ -82,6 +91,27 @@ export const ParcelOperationEditForm: React.FC = () => {
         }
     }
 
+    const deleteParcelOperation = () => {
+        if (parcelOperation) {
+            dispatch(toggleModalIsOpened());
+            dispatch(showNotification({
+                message: "Operation deletion request has been sent.",
+                type: NotificationType.INFO
+            }));
+            sendDeleteParcelOperationRequest(parcelOperation.id)
+                .then((response) => {
+                    dispatch(showNotification({
+                        message: "Successful operation deletion!",
+                        type: NotificationType.SUCCESS
+                    }))
+                    dispatch(deleteParcelOperationAction(response.data));
+                })
+                .catch((res) => {
+                    dispatch(showNotification({message: res.response.data.error, type: NotificationType.ERROR}))
+                })
+        }
+    }
+
     return (
         <Card className={"form"} sx={{maxWidth: {xs: "80%", sm: "500px"},}}>
             <CardHeader
@@ -111,6 +141,10 @@ export const ParcelOperationEditForm: React.FC = () => {
                     <Button disabled={!formIsValid && !!parcelOperation} size={"large"} type="submit"
                             sx={{width: {xs: "100%", sm: "fit-content"}}}
                             variant={"contained"}>{buttonText}</Button>
+                    {parcelOperation && <Button size={"large"} type="button"
+                                                onClick={deleteParcelOperation}
+                                                sx={{width: {xs: "100%", sm: "fit-content"}}}
+                                                variant={"contained"} color={"error"}>Delete Operation</Button>}
                 </CardActions>
             </form>
         </Card>

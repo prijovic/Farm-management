@@ -71,3 +71,11 @@ export const sendDeleteParcelRequest = (id: string) => {
         }
     });
 }
+
+export const sendDeleteParcelOperationRequest = (id: string) => {
+    return axios.delete<string>(config.api + "parcel/operations/" + id, {
+        headers: {
+            "Authorization": "Bearer " + getToken()
+        }
+    });
+}
