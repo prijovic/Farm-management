@@ -15,6 +15,9 @@ import {
     selectParcelOperation,
     updateParcelOperation
 } from "../../../store/features/parcelSlice";
+import {getErrorMessage} from "../../../utils/getErrorMessage";
+import {logout} from "../../../store/features/authSlice";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export const ParcelOperationEditForm: React.FC = () => {
     const {id: parcelId} = useParams();
@@ -40,7 +43,10 @@ export const ParcelOperationEditForm: React.FC = () => {
     }, [parcelOperation]);
 
     const formIsValid: boolean = (nameIsValid && descriptionIsValid && !parcelOperation) ||
-        (!!parcelOperation && ((name !== parcelOperation.name && nameIsValid) || (description !== parcelOperation.description && descriptionIsValid)));
+        (!!parcelOperation && (
+            (name !== parcelOperation.name && nameIsValid && (description === parcelOperation.description || descriptionIsValid))
+            ||
+            (description !== parcelOperation.description && descriptionIsValid && (name === parcelOperation.name || nameIsValid))));
 
     const handleFormSubmit: React.FormEventHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -64,8 +70,14 @@ export const ParcelOperationEditForm: React.FC = () => {
                             dispatch(addParcelOperation(response.data));
                         })
                         .catch((res) => {
-                            dispatch(showNotification({message: res.response.data.error, type: NotificationType.ERROR}))
+                            dispatch(showNotification({message: getErrorMessage(res), type: NotificationType.ERROR}))
                         })
+                        .catch((e) => {
+                            if (e.message === "Unauthorized") {
+                                logout();
+                                dispatch(logout());
+                            }
+                        });
                 } else {
                     dispatch(showNotification({
                         message: "Operation update request has been sent.",
@@ -84,8 +96,14 @@ export const ParcelOperationEditForm: React.FC = () => {
                             dispatch(updateParcelOperation(response.data));
                         })
                         .catch((res) => {
-                            dispatch(showNotification({message: res.response.data.error, type: NotificationType.ERROR}))
+                            dispatch(showNotification({message: getErrorMessage(res), type: NotificationType.ERROR}))
                         })
+                        .catch((e) => {
+                            if (e.message === "Unauthorized") {
+                                logout();
+                                dispatch(logout());
+                            }
+                        });
                 }
             }
         }
@@ -107,8 +125,14 @@ export const ParcelOperationEditForm: React.FC = () => {
                     dispatch(deleteParcelOperationAction(response.data));
                 })
                 .catch((res) => {
-                    dispatch(showNotification({message: res.response.data.error, type: NotificationType.ERROR}))
+                    dispatch(showNotification({message: getErrorMessage(res), type: NotificationType.ERROR}))
                 })
+                .catch((e) => {
+                    if (e.message === "Unauthorized") {
+                        logout();
+                        dispatch(logout());
+                    }
+                });
         }
     }
 
@@ -137,14 +161,19 @@ export const ParcelOperationEditForm: React.FC = () => {
                     </Stack>
                 </CardContent>
                 <CardActions
-                    style={{justifyContent: "center", marginTop: "16px", gap: "1rem"}}>
+                    sx={{flexDirection: {xs: "column", sm: "row"}}}
+                    style={{justifyContent: "center", marginTop: "2rem", gap: "1rem"}}>
                     <Button disabled={!formIsValid && !!parcelOperation} size={"large"} type="submit"
                             sx={{width: {xs: "100%", sm: "fit-content"}}}
                             variant={"contained"}>{buttonText}</Button>
                     {parcelOperation && <Button size={"large"} type="button"
                                                 onClick={deleteParcelOperation}
-                                                sx={{width: {xs: "100%", sm: "fit-content"}}}
-                                                variant={"contained"} color={"error"}>Delete Operation</Button>}
+                                                sx={{
+                                                    width: {xs: "100%", sm: "fit-content"},
+                                                    marginLeft: {xs: "0 !important", sm: "inherit"}
+                                                }}
+                                                variant={"contained"} startIcon={<DeleteIcon/>}
+                                                color={"error"}>Delete</Button>}
                 </CardActions>
             </form>
         </Card>

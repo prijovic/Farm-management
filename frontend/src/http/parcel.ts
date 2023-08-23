@@ -1,8 +1,6 @@
 import {Parcel} from "../model/entities/Parcel";
-import axios from "axios";
-import {config} from "../config";
-import {getToken} from "../utils/auth";
 import {ParcelOperation} from "../model/entities/ParcelOperation";
+import axiosInstance from "./axioInstance";
 
 interface ParcelEditRequest {
     name: string;
@@ -17,65 +15,33 @@ interface ParcelOperationEditRequest {
 }
 
 export const getParcels = () => {
-    return axios.get<Parcel[]>(config.api + "parcel/all", {
-        headers: {
-            "Authorization": "Bearer " + getToken()
-        }
-    });
+    return axiosInstance.get<Parcel[]>("parcel/all");
 }
 
 export const getParcelOperations = (id: string) => {
-    return axios.get<ParcelOperation[]>(config.api + "parcel/" + id + "/operations", {
-        headers: {
-            "Authorization": "Bearer " + getToken()
-        }
-    });
+    return axiosInstance.get<ParcelOperation[]>("parcel/" + id + "/operations");
 }
 
 export const sendCreateParcelRequest = (body: ParcelEditRequest) => {
-    return axios.post<Parcel>(config.api + "parcel", body, {
-        headers: {
-            "Authorization": "Bearer " + getToken()
-        }
-    });
+    return axiosInstance.post<Parcel>("parcel", body);
 }
 
 export const sendCreateParcelOperationRequest = (id: string, body: ParcelOperationEditRequest) => {
-    return axios.post<ParcelOperation>(config.api + "parcel/" + id + "/operations", body, {
-        headers: {
-            "Authorization": "Bearer " + getToken()
-        }
-    });
+    return axiosInstance.post<ParcelOperation>("parcel/" + id + "/operations", body);
 }
 
 export const sendUpdateParcelRequest = (id: string, body: ParcelEditRequest) => {
-    return axios.put<Parcel>(config.api + "parcel/" + id, body, {
-        headers: {
-            "Authorization": "Bearer " + getToken()
-        }
-    });
+    return axiosInstance.put<Parcel>("parcel/" + id, body);
 }
 
 export const sendUpdateParcelOperationRequest = (id: string, body: ParcelOperationEditRequest) => {
-    return axios.put<ParcelOperation>(config.api + "parcel/operations/" + id, body, {
-        headers: {
-            "Authorization": "Bearer " + getToken()
-        }
-    });
+    return axiosInstance.put<ParcelOperation>("parcel/operations/" + id, body);
 }
 
 export const sendDeleteParcelRequest = (id: string) => {
-    return axios.delete<string>(config.api + "parcel/" + id, {
-        headers: {
-            "Authorization": "Bearer " + getToken()
-        }
-    });
+    return axiosInstance.delete<string>("parcel/" + id);
 }
 
 export const sendDeleteParcelOperationRequest = (id: string) => {
-    return axios.delete<string>(config.api + "parcel/operations/" + id, {
-        headers: {
-            "Authorization": "Bearer " + getToken()
-        }
-    });
+    return axiosInstance.delete<string>("parcel/operations/" + id);
 }

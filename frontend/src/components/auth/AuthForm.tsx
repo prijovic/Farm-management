@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {AuthMode} from "./AuthMode";
-import {Button, Card, CardActions, CardContent, CardHeader, Stack} from "@mui/material";
+import {Card, CardActions, CardContent, CardHeader, Stack} from "@mui/material";
 import {InputField} from "../UI/InputField";
 import {PasswordInput} from "../UI/PasswordInput";
 import {CustomDatePicker} from "../UI/CustomDatePicker";
@@ -11,9 +11,11 @@ import {Moment} from "moment";
 import {sendLoginRequest, sendSignUpRequest} from "../../http/auth";
 import {useNavigate} from "react-router-dom";
 import {setToken} from "../../utils/auth";
-import {useAppDispatch} from "../../store/hooks";
+import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import {login} from "../../store/features/authSlice";
-import {NotificationType, showNotification} from "../../store/features/uiSlice";
+import {NotificationType, selectLoading, setLoading, showNotification} from "../../store/features/uiSlice";
+import {getErrorMessage} from "../../utils/getErrorMessage";
+import {LoadingButton} from "@mui/lab";
 
 export enum AuthInputs {
     EMAIL,
@@ -67,6 +69,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({mode}) => {
 
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    const isLoading = useAppSelector(selectLoading);
 
     const changeHandler = (inputType: AuthInputs) => {
         let methodToExecute: (value: any) => void;
@@ -121,6 +124,7 @@ export const AuthForm: React.FC<AuthFormProps> = ({mode}) => {
     const handleFormSubmit: React.FormEventHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (formIsValid) {
+            dispatch(setLoading(true));
             if (mode === AuthMode.LOGIN) {
                 sendLoginRequest({
                     email,
@@ -129,10 +133,12 @@ export const AuthForm: React.FC<AuthFormProps> = ({mode}) => {
                     .then((response) => {
                         setToken(response.data);
                         dispatch(login());
+                        dispatch(setLoading(false));
                         navigate("/", {replace: true});
                     })
                     .catch((res) => {
-                        dispatch(showNotification({message: res.response.data.error, type: NotificationType.ERROR}))
+                        dispatch(setLoading(false));
+                        dispatch(showNotification({message: getErrorMessage(res), type: NotificationType.ERROR}))
                     });
             } else if (mode === AuthMode.SIGN_UP) {
                 sendSignUpRequest({
@@ -145,7 +151,8 @@ export const AuthForm: React.FC<AuthFormProps> = ({mode}) => {
                     farmName
                 })
                     .then(() => {
-                        dispatch(showNotification({message: "Successful sign up!", type: NotificationType.SUCCESS}))
+                        dispatch(showNotification({message: "Successful sign up!", type: NotificationType.SUCCESS}));
+                        dispatch(setLoading(false));
                         setEmail("");
                         setEmailIsValid(false);
                         setPassword("");
@@ -153,8 +160,9 @@ export const AuthForm: React.FC<AuthFormProps> = ({mode}) => {
                         navigate("/auth/login", {replace: true});
                     })
                     .catch((res) => {
-                        dispatch(showNotification({message: res.response.data.error, type: NotificationType.ERROR}))
-                    })
+                        dispatch(setLoading(false));
+                        dispatch(showNotification({message: getErrorMessage(res), type: NotificationType.ERROR}))
+                    });
             }
         }
     }
@@ -209,8 +217,9 @@ export const AuthForm: React.FC<AuthFormProps> = ({mode}) => {
                     </Stack>
                 </CardContent>
                 <CardActions style={{justifyContent: "center", marginTop: "16px"}}>
-                    <Button size={"large"} type="submit" sx={{width: {xs: "100%", sm: "fit-content"}}}
-                            variant={"contained"}>{mode}</Button>
+                    <LoadingButton loading={isLoading} size={"large"} type="submit"
+                                   sx={{width: {xs: "100%", sm: "fit-content"}}}
+                                   variant={"contained"}>{mode}</LoadingButton>
                 </CardActions>
             </form>
         </Card>

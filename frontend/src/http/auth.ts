@@ -1,7 +1,6 @@
 import {Address} from "../model/entities/Address";
-import axios from "axios";
-import {config} from "../config";
 import User from "../model/entities/User";
+import axiosInstance from "./axioInstance";
 
 interface SignUpRequestBody extends LoginRequestBody {
     name: string,
@@ -17,9 +16,9 @@ interface LoginRequestBody {
 }
 
 export const sendLoginRequest = (body: LoginRequestBody) => {
-    return axios.post<string>(config.api + "auth/login", body);
+    return axiosInstance.post<string>("auth/login", body);
 };
 
 export const sendSignUpRequest = (body: SignUpRequestBody) => {
-    return axios.post<User>(config.api + "auth/signUp", body);
+    return axiosInstance.post<User>("auth/signUp", body);
 };

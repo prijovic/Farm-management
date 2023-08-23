@@ -1,14 +1,15 @@
 import React from "react";
 import {ParcelOperation} from "../../../model/entities/ParcelOperation";
-import {Button, Grid, IconButton, Tooltip} from "@mui/material";
+import {Grid} from "@mui/material";
 import {DragDropContext, DropResult} from "react-beautiful-dnd";
 import {useAppDispatch} from "../../../store/hooks";
 import {ParcelOperationsContainerColumn} from "./ParcelOperationsContainerColumn";
-import AddIcon from '@mui/icons-material/Add';
 import {ParcelOperationEditDialog} from "./ParcelOperationEditDialog";
-import {NotificationType, showNotification, toggleModalIsOpened} from "../../../store/features/uiSlice";
+import {NotificationType, showNotification} from "../../../store/features/uiSlice";
 import {sendUpdateParcelOperationRequest} from "../../../http/parcel";
 import {updateParcelOperation} from "../../../store/features/parcelSlice";
+import {getErrorMessage} from "../../../utils/getErrorMessage";
+import {logout} from "../../../store/features/authSlice";
 
 const decodeColumnName = (name: string) => {
     switch (name) {
@@ -56,7 +57,13 @@ export const ParcelOperationsContainer: React.FC<{ parcelOperations: ParcelOpera
                     dispatch(updateParcelOperation(response.data));
                 })
                 .catch((res) => {
-                    dispatch(showNotification({message: res.response.data.error, type: NotificationType.ERROR}))
+                    dispatch(showNotification({message: getErrorMessage(res), type: NotificationType.ERROR}))
+                })
+                .catch((e) => {
+                    if (e.message === "Unauthorized") {
+                        logout();
+                        dispatch(logout());
+                    }
                 });
         }
     }
@@ -79,34 +86,6 @@ export const ParcelOperationsContainer: React.FC<{ parcelOperations: ParcelOpera
                     </Grid>
                 </Grid>
             </DragDropContext>
-            <Grid container>
-                <Grid item sx={{
-                    display: {sm: "none", xs: "flex"},
-                    justifyContent: "flex-end",
-                    alignItems: "center",
-                    marginTop: "1rem"
-                }} xs={12}>
-                    <Button fullWidth onClick={() => dispatch(toggleModalIsOpened())} color={"primary"}
-                            aria-label="create"
-                            size="medium">
-                        Add Operation
-                    </Button>
-                </Grid>
-                <Grid item sx={{
-                    display: {xs: "none", sm: "flex"},
-                    justifyContent: "flex-end",
-                    alignItems: "center",
-                    marginTop: "1rem"
-                }} sm={12}>
-                    <Tooltip title={"Add Operation"}>
-                        <IconButton color={"primary"} onClick={() => dispatch(toggleModalIsOpened())}
-                                    aria-label="create"
-                                    size="medium">
-                            <AddIcon></AddIcon>
-                        </IconButton>
-                    </Tooltip>
-                </Grid>
-            </Grid>
         </>
     );
 };

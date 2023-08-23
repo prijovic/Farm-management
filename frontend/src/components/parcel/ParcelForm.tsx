@@ -7,6 +7,9 @@ import {NotificationType, showNotification} from "../../store/features/uiSlice";
 import {sendCreateParcelRequest, sendDeleteParcelRequest, sendUpdateParcelRequest} from "../../http/parcel";
 import {Parcel} from "../../model/entities/Parcel";
 import {deleteParcel as deleteParcelAction, selectParcel, updateParcel} from "../../store/features/parcelSlice";
+import {getErrorMessage} from "../../utils/getErrorMessage";
+import {logout} from "../../store/features/authSlice";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export const ParcelForm: React.FC = () => {
     const {id} = useParams();
@@ -70,7 +73,13 @@ export const ParcelForm: React.FC = () => {
                         navigate("/parcel/" + id, {replace: true});
                     })
                     .catch((res) => {
-                        dispatch(showNotification({message: res.response.data.error, type: NotificationType.ERROR}))
+                        dispatch(showNotification({message: getErrorMessage(res), type: NotificationType.ERROR}))
+                    })
+                    .catch((e) => {
+                        if (e.message === "Unauthorized") {
+                            logout();
+                            dispatch(logout());
+                        }
                     });
             } else {
                 dispatch(showNotification({
@@ -86,8 +95,14 @@ export const ParcelForm: React.FC = () => {
                         navigate("/parcel/all", {replace: true});
                     })
                     .catch((res) => {
-                        dispatch(showNotification({message: res.response.data.error, type: NotificationType.ERROR}))
+                        dispatch(showNotification({message: getErrorMessage(res), type: NotificationType.ERROR}))
                     })
+                    .catch((e) => {
+                        if (e.message === "Unauthorized") {
+                            logout();
+                            dispatch(logout());
+                        }
+                    });
             }
         }
     }
@@ -108,8 +123,14 @@ export const ParcelForm: React.FC = () => {
                     navigate("/parcel/all", {replace: true});
                 })
                 .catch((res) => {
-                    dispatch(showNotification({message: res.response.data.error, type: NotificationType.ERROR}))
+                    dispatch(showNotification({message: getErrorMessage(res), type: NotificationType.ERROR}))
                 })
+                .catch((e) => {
+                    if (e.message === "Unauthorized") {
+                        logout();
+                        dispatch(logout());
+                    }
+                });
         }
     }
 
@@ -147,14 +168,18 @@ export const ParcelForm: React.FC = () => {
                     </Stack>
                 </CardContent>
                 <CardActions
-                    style={{justifyContent: "center", marginTop: "16px", gap: "1rem"}}>
+                    sx={{flexDirection: {xs: "column", sm: "row"}}}
+                    style={{justifyContent: "center", marginTop: "2rem", gap: "1rem"}}>
                     <Button disabled={!formIsValid && !!id} size={"large"} type="submit"
                             sx={{width: {xs: "100%", sm: "fit-content"}}}
                             variant={"contained"}>{buttonText}</Button>
                     {id && <Button size={"large"} type="button"
                                    onClick={deleteParcel}
-                                   sx={{width: {xs: "100%", sm: "fit-content"}}}
-                                   variant={"contained"} color={"error"}>Delete Parcel</Button>}
+                                   sx={{
+                                       width: {xs: "100%", sm: "fit-content"},
+                                       marginLeft: {xs: "0 !important", sm: "inherit"}
+                                   }}
+                                   variant={"contained"} color={"error"} startIcon={<DeleteIcon/>}>Delete</Button>}
                 </CardActions>
             </form>
         </Card>

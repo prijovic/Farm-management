@@ -1,8 +1,0 @@
-.editButton {
-    display: none;
-    margin-top: -8px;
-}
-
-.card:hover .editButton {
-    display: inline;
-}

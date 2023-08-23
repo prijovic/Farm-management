@@ -1,12 +1,15 @@
 import React, {useEffect, useState} from "react";
-import {Grid} from "@mui/material";
+import {Button, Divider, Grid, IconButton, Tooltip, Typography, useMediaQuery, useTheme} from "@mui/material";
 import {ParcelDetailsCard} from "../components/parcel/ParcelDetailsCard";
 import {ParcelOperationsContainer} from "../components/parcel/parcelOperation/ParcelOperationsContainer";
 import {useAppDispatch, useAppSelector} from "../store/hooks";
 import {selectParcel, selectParcelOperations, setParcelOperations} from "../store/features/parcelSlice";
 import {useParams} from "react-router-dom";
 import {getParcelOperations} from "../http/parcel";
-import {NotificationType, showNotification} from "../store/features/uiSlice";
+import {NotificationType, showNotification, toggleModalIsOpened} from "../store/features/uiSlice";
+import {getErrorMessage} from "../utils/getErrorMessage";
+import {logout} from "../store/features/authSlice";
+import AddIcon from "@mui/icons-material/Add";
 
 export const ParcelDetailsPage: React.FC = () => {
     const {id} = useParams();
@@ -14,6 +17,8 @@ export const ParcelDetailsPage: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
     const parcelOperations = useAppSelector(selectParcelOperations);
     const dispatch = useAppDispatch();
+    const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.only("sm"));
 
     useEffect(() => {
         async function fetchParcelOperations() {
@@ -23,7 +28,13 @@ export const ParcelDetailsPage: React.FC = () => {
                         dispatch(setParcelOperations(response.data));
                     })
                     .catch((res) => {
-                        dispatch(showNotification({message: res.response.data.error, type: NotificationType.ERROR}))
+                        dispatch(showNotification({message: getErrorMessage(res), type: NotificationType.ERROR}))
+                    })
+                    .catch((e) => {
+                        if (e.message === "Unauthorized") {
+                            logout();
+                            dispatch(logout());
+                        }
                     });
             }
 
@@ -33,19 +44,39 @@ export const ParcelDetailsPage: React.FC = () => {
     }, [dispatch, id])
 
     return (
-        <>
-            <Grid style={{paddingInline: "3rem"}} container spacing={2}>
-                <Grid item sm={4} xs={12}>
-                    {parcel && <ParcelDetailsCard parcel={parcel}/>}
+        <Grid container spacing={2}>
+            <Grid item sm={4} xs={12} display="flex" justifyContent="flex-end" component="section">
+                {parcel && <ParcelDetailsCard parcel={parcel}/>}
+            </Grid>
+            <Grid item xs={12} sm={8} flexDirection="column"
+                  sx={{display: {xs: "flex", sm: "inline"}}}>
+                <Grid container>
+                    <Grid item xs={12} sm={6}>
+                        <Typography variant="h5" component="h2">
+                            Parcel Operations
+                        </Typography>
+                    </Grid>
+                    <Grid item sm={6}
+                          sx={{display: {xs: "none", sm: "flex"}, justifyContent: "flex-end", alignItems: "center"}}>
+                        {matches && <Tooltip title={"Add operation"}>
+                          <IconButton color="primary"
+                                      onClick={() => dispatch(toggleModalIsOpened())}><AddIcon/></IconButton>
+                        </Tooltip>}
+                        {!matches && <Button startIcon={<AddIcon/>} variant={"contained"}
+                                             onClick={() => dispatch(toggleModalIsOpened())}>Add Operation</Button>}
+                    </Grid>
                 </Grid>
-                <Grid item sm={8} xs={0}>
+                <Grid item xs={12} marginTop="1rem" marginBottom="2rem">
+                    <Divider orientation={"horizontal"}></Divider>
+                </Grid>
+                <Grid item sm={12} xs={0} component="section">
                     <div style={{textAlign: 'center'}}>
                         {isLoading && <p>Loading...</p>}
                     </div>
                     <ParcelOperationsContainer parcelOperations={parcelOperations}/>
                 </Grid>
             </Grid>
-        </>
+        </Grid>
 
     );
 };
