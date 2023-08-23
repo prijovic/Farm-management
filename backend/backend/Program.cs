@@ -75,6 +75,7 @@ builder.Services.AddScoped<UpdateParcel>();
 builder.Services.AddScoped<DeleteParcel>();
 builder.Services.AddScoped<GetAllParcelOperations>();
 builder.Services.AddScoped<CreateParcelOperation>();
+builder.Services.AddScoped<UpdateParcelOperation>();
 
 var app = builder.Build();
 
