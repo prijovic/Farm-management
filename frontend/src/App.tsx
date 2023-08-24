@@ -13,12 +13,13 @@ import {selectTheme} from "./store/features/uiSlice";
 import {Notification} from "./components/Notification";
 import {ParcelsPage} from "./pages/ParcelsPage";
 import {ParcelEditPage} from "./pages/ParcelEditPage";
-import {ParcelDetailsPage} from "./pages/ParcelDetailsPage";
 import {ProtectedRoute} from "./router/ProtectedRoute";
+import {ParcelDetailsPage} from "./pages/ParcelDetailsPage";
+import {ErrorPage} from "./pages/ErrorPage";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
-        <Route path="/" element={<RootLayout/>}>
+        <Route path="/" element={<RootLayout/>} errorElement={<ErrorPage/>}>
             <Route index={true} element={<HomePage/>}/>
             <Route path="auth/:mode" element={<AuthPage/>}/>
             <Route path="parcel/all" element={

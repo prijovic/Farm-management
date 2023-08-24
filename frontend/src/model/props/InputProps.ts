@@ -8,4 +8,6 @@ export interface InputProps {
     validators?: { [key: string]: RegExp };
     required?: boolean;
     inputProps?: any;
+    multiline?: boolean;
+    rows?: number;
 }
