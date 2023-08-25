@@ -25,7 +25,7 @@ public class GetAllUserParcels
         
         var parcels = await (from parcel in _context.Parcels
             where parcel.UserId == user.Id
-            select parcel).ToListAsync();
+            select parcel).Include(p => p.Polygon).ToListAsync();
 
         return _mapper.Map<List<ParcelResponse>>(parcels);
     }
