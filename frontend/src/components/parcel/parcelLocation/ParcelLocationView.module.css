@@ -1,0 +1,9 @@
+.map {
+    height: 25vh;
+    width: 100%;
+    border-radius: 4px;
+}
+
+.map.form {
+    height: 50vh;
+}

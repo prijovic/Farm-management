@@ -8,4 +8,5 @@ public class ParcelResponse
     public string Name { get; set; }
     public long Number { get; set; }
     public long Size { get; set; }
+    public List<LocationDTO> Polygon { get; set; }
 }

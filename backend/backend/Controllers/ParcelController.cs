@@ -13,16 +13,20 @@ namespace backend.Controllers;
 [Route("parcel")]
 public class ParcelController : ControllerBase
 {
-    private readonly GetAllUserParcels _getAllUserParcels;
     private readonly CreateParcel _createParcel;
-    private readonly UpdateParcel _updateParcel;
-    private readonly DeleteParcel _deleteParcel;
-    private readonly GetAllParcelOperations _getAllParcelOperations;
     private readonly CreateParcelOperation _createParcelOperation;
-    private readonly UpdateParcelOperation _updateParcelOperation;
+    private readonly DeleteParcel _deleteParcel;
     private readonly DeleteParcelOperation _deleteParcelOperation;
+    private readonly GetAllParcelOperations _getAllParcelOperations;
+    private readonly GetAllUserParcels _getAllUserParcels;
+    private readonly UpdateParcel _updateParcel;
+    private readonly UpdateParcelOperation _updateParcelOperation;
+    private readonly UpdateParcelPolygon _updateParcelPolygon;
 
-    public ParcelController(GetAllUserParcels getAllUserParcels, CreateParcel createParcel, UpdateParcel updateParcel, DeleteParcel deleteParcel, GetAllParcelOperations getAllParcelOperations, CreateParcelOperation createParcelOperation, UpdateParcelOperation updateParcelOperation, DeleteParcelOperation deleteParcelOperation)
+    public ParcelController(GetAllUserParcels getAllUserParcels, CreateParcel createParcel, UpdateParcel updateParcel,
+        DeleteParcel deleteParcel, GetAllParcelOperations getAllParcelOperations,
+        CreateParcelOperation createParcelOperation, UpdateParcelOperation updateParcelOperation,
+        DeleteParcelOperation deleteParcelOperation, UpdateParcelPolygon updateParcelPolygon)
     {
         _getAllUserParcels = getAllUserParcels;
         _createParcel = createParcel;
@@ -32,8 +36,9 @@ public class ParcelController : ControllerBase
         _createParcelOperation = createParcelOperation;
         _updateParcelOperation = updateParcelOperation;
         _deleteParcelOperation = deleteParcelOperation;
+        _updateParcelPolygon = updateParcelPolygon;
     }
-    
+
     [HttpGet("all")]
     public async Task<List<ParcelResponse>> GetAllUserParcels()
     {
@@ -64,9 +69,17 @@ public class ParcelController : ControllerBase
     {
         return await _updateParcel.Execute(id, updateParcelRequest);
     }
-    
+
+    [HttpPut("{id:guid}/polygon")]
+    public async Task<ParcelResponse> UpdateParcelPolygon([FromRoute] Guid id,
+        [FromBody] UpdateParcelPolygonRequest updateParcelPolygonRequest)
+    {
+        return await _updateParcelPolygon.Execute(id, updateParcelPolygonRequest.Polygon);
+    }
+
     [HttpPut("operations/{id:guid}")]
-    public async Task<ParcelOperationResponse> UpdateParcelOperation([FromRoute] Guid id, [FromBody] CUParcelOperationRequest updateParcelOperationRequest)
+    public async Task<ParcelOperationResponse> UpdateParcelOperation([FromRoute] Guid id,
+        [FromBody] CUParcelOperationRequest updateParcelOperationRequest)
     {
         return await _updateParcelOperation.Execute(id, updateParcelOperationRequest);
     }
@@ -76,7 +89,7 @@ public class ParcelController : ControllerBase
     {
         return await _deleteParcel.Execute(id);
     }
-    
+
     [HttpDelete("operations/{id:guid}")]
     public async Task<Guid> DeleteParcelOperation([FromRoute] Guid id)
     {

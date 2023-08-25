@@ -15,8 +15,9 @@ public class ParcelProfile : Profile
             .ForMember(dest => dest.LastEditDate, options => options.MapFrom(src => src.LastEditDate))
             .ForMember(dest => dest.Name, options => options.MapFrom(src => src.Name))
             .ForMember(dest => dest.Number, options => options.MapFrom(src => src.Number))
-            .ForMember(dest => dest.Size, options => options.MapFrom(src => src.Size));
-        
+            .ForMember(dest => dest.Size, options => options.MapFrom(src => src.Size))
+            .ForMember(dest => dest.Polygon, options => options.MapFrom(src => src.Polygon));
+
         CreateMap<CUParcelRequest, Parcel>()
             .ForMember(dest => dest.Name, options => options.MapFrom(src => src.Name))
             .ForMember(dest => dest.Number, options => options.MapFrom(src => src.Number))

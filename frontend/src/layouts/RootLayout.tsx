@@ -18,7 +18,7 @@ export const RootLayout: React.FC = () => {
             dispatch(login());
             navigate("/", {replace: true});
         }
-    }, [token]);
+    }, [token, navigate, dispatch]);
 
     return (
         <>

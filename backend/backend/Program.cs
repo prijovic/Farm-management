@@ -6,7 +6,6 @@ using backend.Services.auth;
 using backend.Services.Parcel;
 using backend.Services.ParcelOperation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -77,6 +76,8 @@ builder.Services.AddScoped<GetAllParcelOperations>();
 builder.Services.AddScoped<CreateParcelOperation>();
 builder.Services.AddScoped<UpdateParcelOperation>();
 builder.Services.AddScoped<DeleteParcelOperation>();
+builder.Services.AddScoped<UpdateParcelPolygon>();
+builder.Services.AddScoped<GetParcelById>();
 
 var app = builder.Build();
 
