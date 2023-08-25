@@ -26,7 +26,7 @@ interface ApiResponse {
 export const AddressInput: React.FC<InputProps> = ({id, required, label, onValidityChange, onChange, value}) => {
     const [options, setOptions] = useState<readonly Address[]>([]);
     const [inputValue, setInputValue] = useState('');
-    const useInputRes = useInput({
+    const _ = useInput({
         required, label, onChange: (value: string) => {
             setInputValue(value)
         }, onValidityChange
