@@ -9,6 +9,9 @@ export class Parcel {
     public number: number,
     public size: number,
     public polygon: Location[],
+    public plannedOperations: number,
+    public inProgressOperations: number,
+    public finishedOperations: number,
   ) {}
 
   public static sortPolygon(polygon: Location[]) {

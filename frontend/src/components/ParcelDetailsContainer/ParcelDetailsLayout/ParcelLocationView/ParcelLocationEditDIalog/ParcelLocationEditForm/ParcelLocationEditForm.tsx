@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import { LatLng, LatLngTuple, Map as LMap } from "leaflet";
-import classes from "./ParcelLocationView.module.css";
+import classes from "../../ParcelLocationView.module.css";
 import {
   Button,
   Card,
@@ -12,19 +12,20 @@ import {
   Tooltip,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import { DraggableMarker } from "./DraggableMarker";
 import { MarkerFactory } from "./DraggableMarker/DraggableMarker";
+import { PolygonOverlay } from "../../PolygonOverlay/PolygonOverlay";
 import { useParams } from "react-router-dom";
-import { useAppDispatch } from "../../../store/hooks";
-import { Location } from "../../../model/entities/Location";
-import { sendUpdateParcelPolygonRequest } from "../../../http/parcel";
+import { useAppDispatch } from "../../../../../../store/hooks";
+import { Location } from "../../../../../../model/entities/Location";
+import { sendUpdateParcelPolygonRequest } from "../../../../../../http/parcel";
 import {
+  DialogContentType,
   NotificationType,
   showNotification,
-  toggleModal2IsOpened,
-} from "../../../store/features/uiSlice";
-import { updateParcel } from "../../../store/features/parcelSlice";
-import { getErrorMessage } from "../../../utils/getErrorMessage";
+  toggleDialogIsOpened,
+} from "../../../../../../store/features/uiSlice";
+import { updateParcel } from "../../../../../../store/features/parcelSlice";
+import { getErrorMessage } from "../../../../../../utils/getErrorMessage";
 
 interface MarkersState {
   markers: JSX.Element[];
@@ -153,7 +154,9 @@ export const ParcelLocationEditForm: React.FC<{
               type: NotificationType.SUCCESS,
             }),
           );
-          dispatch(toggleModal2IsOpened());
+          dispatch(
+            toggleDialogIsOpened(DialogContentType.PARCEL_LOCATION_EDIT),
+          );
           dispatch(updateParcel(response.data));
         })
         .catch((res) => {

@@ -232,8 +232,8 @@ namespace backend.Migrations
                     b.Property<long>("Number")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("Size")
-                        .HasColumnType("bigint");
+                    b.Property<double>("Size")
+                        .HasColumnType("double precision");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
@@ -257,6 +257,9 @@ namespace backend.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("Index")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("LastEditDate")
                         .HasColumnType("timestamp with time zone");

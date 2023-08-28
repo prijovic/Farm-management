@@ -17,7 +17,7 @@ public class GetParcelById
     {
         var parcel = await (from p in _context.Parcels
             where p.Id == id
-            select p).Include(p => p.Polygon).FirstAsync();;
+            select p).Include(p => p.Operations).Include(p => p.Polygon).FirstAsync();;
 
         if (parcel == null)
         {

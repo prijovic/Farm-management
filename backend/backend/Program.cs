@@ -77,7 +77,10 @@ builder.Services.AddScoped<CreateParcelOperation>();
 builder.Services.AddScoped<UpdateParcelOperation>();
 builder.Services.AddScoped<DeleteParcelOperation>();
 builder.Services.AddScoped<UpdateParcelPolygon>();
+builder.Services.AddScoped<UpdateParcelOperationPosition>();
 builder.Services.AddScoped<GetParcelById>();
+builder.Services.AddScoped<GetParcelOperationById>();
+builder.Services.AddScoped<GetNextParcelOperationIndex>();
 
 var app = builder.Build();
 

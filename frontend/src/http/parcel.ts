@@ -12,7 +12,11 @@ interface ParcelEditRequest {
 interface ParcelOperationEditRequest {
   name: string;
   description: string;
-  status?: number;
+}
+
+interface ParcelOperationPositionEditRequest {
+  status: number;
+  index: number;
 }
 
 export const getParcels = () => {
@@ -56,6 +60,16 @@ export const sendUpdateParcelOperationRequest = (
   body: ParcelOperationEditRequest,
 ) => {
   return axiosInstance.put<ParcelOperation>("parcel/operations/" + id, body);
+};
+
+export const sendUpdateParcelOperationPositionRequest = (
+  id: string,
+  body: ParcelOperationPositionEditRequest,
+) => {
+  return axiosInstance.put<ParcelOperation[]>(
+    "parcel/operations/" + id + "/position",
+    body,
+  );
 };
 
 export const sendDeleteParcelRequest = (id: string) => {

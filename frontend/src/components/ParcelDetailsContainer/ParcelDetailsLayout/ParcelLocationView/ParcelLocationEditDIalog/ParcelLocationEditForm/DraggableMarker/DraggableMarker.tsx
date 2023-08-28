@@ -1,7 +1,7 @@
 import React, { useMemo, useRef, useState } from "react";
 import { Marker } from "react-leaflet";
 import { Icon, LatLngTuple } from "leaflet";
-import { config } from "../../../config";
+import { config } from "../../../../../../../config";
 import { useTheme } from "@mui/material";
 
 export class MarkerFactory {
