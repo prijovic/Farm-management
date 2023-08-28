@@ -3,22 +3,32 @@ import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
 import { ParcelOperationEditForm } from "./ParcelOperationEditForm/ParcelOperationEditForm";
 import { useAppDispatch, useAppSelector } from "../../../../../store/hooks";
 import {
-  selectModalIsOpened,
-  toggleModalIsOpened,
+  DialogContentType,
+  selectDialogContentType,
+  selectDialogIsOpened,
+  toggleDialogIsOpened,
 } from "../../../../../store/features/uiSlice";
 import { setParcelOperationId } from "../../../../../store/features/parcelSlice";
 
 export const ParcelOperationEditDialog: React.FC = () => {
   const dispatch = useAppDispatch();
-  const modalIsOpened = useAppSelector(selectModalIsOpened);
+  const dialogIsOpened = useAppSelector(selectDialogIsOpened);
+  const dialogContentType = useAppSelector(selectDialogContentType);
 
   const handleDialogClose = () => {
-    dispatch(toggleModalIsOpened());
+    dispatch(toggleDialogIsOpened(dialogContentType));
     dispatch(setParcelOperationId(null));
   };
 
   return (
-    <Dialog scroll={"body"} open={modalIsOpened} onClose={handleDialogClose}>
+    <Dialog
+      scroll={"body"}
+      open={
+        dialogContentType === DialogContentType.PARCEL_OPERATION_EDIT &&
+        dialogIsOpened
+      }
+      onClose={handleDialogClose}
+    >
       <DialogContent>
         <ParcelOperationEditForm />
       </DialogContent>

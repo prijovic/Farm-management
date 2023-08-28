@@ -19,9 +19,10 @@ import { useAppDispatch } from "../../../../../../store/hooks";
 import { Location } from "../../../../../../model/entities/Location";
 import { sendUpdateParcelPolygonRequest } from "../../../../../../http/parcel";
 import {
+  DialogContentType,
   NotificationType,
   showNotification,
-  toggleModal2IsOpened,
+  toggleDialogIsOpened,
 } from "../../../../../../store/features/uiSlice";
 import { updateParcel } from "../../../../../../store/features/parcelSlice";
 import { getErrorMessage } from "../../../../../../utils/getErrorMessage";
@@ -158,7 +159,9 @@ export const ParcelLocationEditForm: React.FC<{
               type: NotificationType.SUCCESS,
             }),
           );
-          dispatch(toggleModal2IsOpened());
+          dispatch(
+            toggleDialogIsOpened(DialogContentType.PARCEL_LOCATION_EDIT),
+          );
           dispatch(updateParcel(response.data));
         })
         .catch((res) => {

@@ -10,9 +10,10 @@ import {
   useTheme,
 } from "@mui/material";
 import {
+  DialogContentType,
   NotificationType,
   showNotification,
-  toggleModalIsOpened,
+  toggleDialogIsOpened,
 } from "../../../store/features/uiSlice";
 import AddIcon from "@mui/icons-material/Add";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
@@ -86,7 +87,13 @@ export const ParcelOperationsLayout: React.FC<{ id: string }> = ({ id }) => {
             <Tooltip title={"Add operation"}>
               <IconButton
                 color="primary"
-                onClick={() => dispatch(toggleModalIsOpened())}
+                onClick={() =>
+                  dispatch(
+                    toggleDialogIsOpened(
+                      DialogContentType.PARCEL_OPERATION_EDIT,
+                    ),
+                  )
+                }
               >
                 <AddIcon />
               </IconButton>
@@ -96,7 +103,11 @@ export const ParcelOperationsLayout: React.FC<{ id: string }> = ({ id }) => {
             <Button
               startIcon={<AddIcon />}
               variant={"contained"}
-              onClick={() => dispatch(toggleModalIsOpened())}
+              onClick={() =>
+                dispatch(
+                  toggleDialogIsOpened(DialogContentType.PARCEL_OPERATION_EDIT),
+                )
+              }
             >
               Add Operation
             </Button>

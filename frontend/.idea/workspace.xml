@@ -6,33 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="176d7488-c927-4a9b-834c-b63535eec9ed" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MainNavbar.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MainNavbar/MainNavbar.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MainNavbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MainNavbar/MainNavbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/auth/AuthForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AuthForm/AuthForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/auth/AuthMode.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/parcel/ParcelCard.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelsContainer/ParcelCard/ParcelCard.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/parcel/ParcelCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelsContainer/ParcelCard/ParcelCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/parcel/ParcelDetailsCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelDetailsLayout/ParcelDetailsCard/ParcelDetailsCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/parcel/ParcelForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelForm/ParcelForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/parcel/ParcelsContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelsContainer/ParcelsContainer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/parcel/parcelLocation/DraggableMarker.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelDetailsLayout/ParcelLocationView/ParcelLocationEditDIalog/ParcelLocationEditForm/DraggableMarker/DraggableMarker.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/parcel/parcelLocation/ParcelLocationEditDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelDetailsLayout/ParcelLocationView/ParcelLocationEditDIalog/ParcelLocationEditDialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/parcel/parcelLocation/ParcelLocationEditForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelDetailsLayout/ParcelLocationView/ParcelLocationEditDIalog/ParcelLocationEditForm/ParcelLocationEditForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/parcel/parcelLocation/ParcelLocationView.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelDetailsLayout/ParcelLocationView/ParcelLocationView.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/parcel/parcelLocation/ParcelLocationView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelDetailsLayout/ParcelLocationView/ParcelLocationView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/parcel/parcelLocation/PolygonOverlay.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelDetailsLayout/ParcelLocationView/PolygonOverlay/PolygonOverlay.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/parcel/parcelOperation/ParcelOperationCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsContainer/ParcelOperationsContainerColumn/ParcelOperationCard/ParcelOperationCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/parcel/parcelOperation/ParcelOperationEditDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsContainer/ParcelOperationEditDialog/ParcelOperationEditDialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/parcel/parcelOperation/ParcelOperationEditForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsContainer/ParcelOperationEditDialog/ParcelOperationEditForm/ParcelOperationEditForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/parcel/parcelOperation/ParcelOperationsContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsContainer/ParcelOperationsContainer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/parcel/parcelOperation/ParcelOperationsContainerColumn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsContainer/ParcelOperationsContainerColumn/ParcelOperationsContainerColumn.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/RootLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/RootLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/AuthPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/AuthPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/ParcelDetailsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ParcelDetailsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/ParcelEditPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ParcelEditPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/ParcelsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ParcelsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/auth.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelDetailsLayout/ParcelLocationView/ParcelLocationEditDIalog/ParcelLocationEditDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelDetailsLayout/ParcelLocationView/ParcelLocationEditDIalog/ParcelLocationEditDialog.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelDetailsLayout/ParcelLocationView/ParcelLocationEditDIalog/ParcelLocationEditForm/ParcelLocationEditForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelDetailsLayout/ParcelLocationView/ParcelLocationEditDIalog/ParcelLocationEditForm/ParcelLocationEditForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelDetailsLayout/ParcelLocationView/ParcelLocationView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelDetailsLayout/ParcelLocationView/ParcelLocationView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsContainer/ParcelOperationEditDialog/ParcelOperationEditDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsContainer/ParcelOperationEditDialog/ParcelOperationEditDialog.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsContainer/ParcelOperationEditDialog/ParcelOperationEditForm/ParcelOperationEditForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsContainer/ParcelOperationEditDialog/ParcelOperationEditForm/ParcelOperationEditForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsContainer/ParcelOperationsContainerColumn/ParcelOperationCard/ParcelOperationCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsContainer/ParcelOperationsContainerColumn/ParcelOperationCard/ParcelOperationCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/uiSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/uiSlice.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +97,7 @@
       <workItem from="1692966521231" duration="341000" />
       <workItem from="1692968032570" duration="19000" />
       <workItem from="1692968240501" duration="6874000" />
-      <workItem from="1693064001245" duration="12964000" />
+      <workItem from="1693064001245" duration="13908000" />
     </task>
     <servers />
   </component>

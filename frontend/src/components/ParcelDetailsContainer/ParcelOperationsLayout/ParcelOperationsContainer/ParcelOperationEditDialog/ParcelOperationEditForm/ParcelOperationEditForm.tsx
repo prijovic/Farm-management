@@ -15,9 +15,10 @@ import {
 } from "../../../../../../http/parcel";
 import { useParams } from "react-router-dom";
 import {
+  DialogContentType,
   NotificationType,
   showNotification,
-  toggleModalIsOpened,
+  toggleDialogIsOpened,
 } from "../../../../../../store/features/uiSlice";
 import { useAppDispatch, useAppSelector } from "../../../../../../store/hooks";
 import {
@@ -79,7 +80,9 @@ export const ParcelOperationEditForm: React.FC = () => {
               type: NotificationType.INFO,
             }),
           );
-          dispatch(toggleModalIsOpened());
+          dispatch(
+            toggleDialogIsOpened(DialogContentType.PARCEL_OPERATION_EDIT),
+          );
           sendCreateParcelOperationRequest(parcelId, {
             name,
             description,
@@ -114,7 +117,9 @@ export const ParcelOperationEditForm: React.FC = () => {
               type: NotificationType.INFO,
             }),
           );
-          dispatch(toggleModalIsOpened());
+          dispatch(
+            toggleDialogIsOpened(DialogContentType.PARCEL_OPERATION_EDIT),
+          );
           sendUpdateParcelOperationRequest(parcelOperation.id, {
             name,
             description,
@@ -149,7 +154,7 @@ export const ParcelOperationEditForm: React.FC = () => {
 
   const deleteParcelOperation = () => {
     if (parcelOperation) {
-      dispatch(toggleModalIsOpened());
+      dispatch(toggleDialogIsOpened(DialogContentType.PARCEL_OPERATION_EDIT));
       dispatch(
         showNotification({
           message: "Operation deletion request has been sent.",

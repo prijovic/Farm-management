@@ -7,7 +7,10 @@ import { IconButton, Tooltip, useTheme } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { ParcelLocationEditDialog } from "./ParcelLocationEditDIalog/ParcelLocationEditDialog";
 import { useAppDispatch } from "../../../../store/hooks";
-import { toggleModal2IsOpened } from "../../../../store/features/uiSlice";
+import {
+  DialogContentType,
+  toggleDialogIsOpened,
+} from "../../../../store/features/uiSlice";
 import { PolygonOverlay } from "./PolygonOverlay/PolygonOverlay";
 
 export const ParcelLocationView: React.FC<{ polygon: Location[] }> = ({
@@ -56,7 +59,13 @@ export const ParcelLocationView: React.FC<{ polygon: Location[] }> = ({
           <div className="leaflet-control">
             <Tooltip title={"Edit location"}>
               <IconButton
-                onClick={() => dispatch(toggleModal2IsOpened())}
+                onClick={() =>
+                  dispatch(
+                    toggleDialogIsOpened(
+                      DialogContentType.PARCEL_LOCATION_EDIT,
+                    ),
+                  )
+                }
                 sx={{
                   background: theme.palette.background.default,
                 }}
