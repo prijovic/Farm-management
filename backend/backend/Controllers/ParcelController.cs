@@ -21,12 +21,14 @@ public class ParcelController : ControllerBase
     private readonly GetAllUserParcels _getAllUserParcels;
     private readonly UpdateParcel _updateParcel;
     private readonly UpdateParcelOperation _updateParcelOperation;
+    private readonly UpdateParcelOperationPosition _updateParcelOperationPosition;
     private readonly UpdateParcelPolygon _updateParcelPolygon;
 
     public ParcelController(GetAllUserParcels getAllUserParcels, CreateParcel createParcel, UpdateParcel updateParcel,
         DeleteParcel deleteParcel, GetAllParcelOperations getAllParcelOperations,
         CreateParcelOperation createParcelOperation, UpdateParcelOperation updateParcelOperation,
-        DeleteParcelOperation deleteParcelOperation, UpdateParcelPolygon updateParcelPolygon)
+        DeleteParcelOperation deleteParcelOperation, UpdateParcelPolygon updateParcelPolygon,
+        UpdateParcelOperationPosition updateParcelOperationPosition)
     {
         _getAllUserParcels = getAllUserParcels;
         _createParcel = createParcel;
@@ -37,6 +39,7 @@ public class ParcelController : ControllerBase
         _updateParcelOperation = updateParcelOperation;
         _deleteParcelOperation = deleteParcelOperation;
         _updateParcelPolygon = updateParcelPolygon;
+        _updateParcelOperationPosition = updateParcelOperationPosition;
     }
 
     [HttpGet("all")]
@@ -82,6 +85,13 @@ public class ParcelController : ControllerBase
         [FromBody] CUParcelOperationRequest updateParcelOperationRequest)
     {
         return await _updateParcelOperation.Execute(id, updateParcelOperationRequest);
+    }
+
+    [HttpPut("operations/{id:guid}/position")]
+    public async Task<List<ParcelOperationResponse>> UpdateParcelOperationPosition([FromRoute] Guid id,
+        [FromBody] UpdateParcelOperationPositionRequest updateParcelOperationPositionRequest)
+    {
+        return await _updateParcelOperationPosition.Execute(id, updateParcelOperationPositionRequest);
     }
 
     [HttpDelete("{id:guid}")]

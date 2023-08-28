@@ -1,11 +1,14 @@
 import React from "react";
-import { ParcelOperation } from "../../../model/entities/ParcelOperation";
+import { ParcelOperation } from "../../../../../../model/entities/ParcelOperation";
 import { Card, CardContent, Typography } from "@mui/material";
-import { toDateOutput } from "../../../utils/toDateOutput";
-import { useAppDispatch } from "../../../store/hooks";
-import { toggleModalIsOpened } from "../../../store/features/uiSlice";
-import { setParcelOperationId } from "../../../store/features/parcelSlice";
+import { toDateOutput } from "../../../../../../utils/toDateOutput";
+import { useAppDispatch } from "../../../../../../store/hooks";
+import { setParcelOperationId } from "../../../../../../store/features/parcelSlice";
 import { Draggable } from "@hello-pangea/dnd";
+import {
+  DialogContentType,
+  toggleDialogIsOpened,
+} from "../../../../../../store/features/uiSlice";
 
 export const ParcelOperationCard: React.FC<{
   parcelOperation: ParcelOperation;
@@ -26,7 +29,7 @@ export const ParcelOperationCard: React.FC<{
 
   const startEdit = () => {
     dispatch(setParcelOperationId(parcelOperation.id));
-    dispatch(toggleModalIsOpened());
+    dispatch(toggleDialogIsOpened(DialogContentType.PARCEL_OPERATION_EDIT));
   };
 
   return (

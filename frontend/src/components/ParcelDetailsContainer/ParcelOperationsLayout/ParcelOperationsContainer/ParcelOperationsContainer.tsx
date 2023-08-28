@@ -1,17 +1,17 @@
 import React from "react";
-import { ParcelOperation } from "../../../model/entities/ParcelOperation";
+import { ParcelOperation } from "../../../../model/entities/ParcelOperation";
 import { Grid } from "@mui/material";
-import { useAppDispatch } from "../../../store/hooks";
-import { ParcelOperationsContainerColumn } from "./ParcelOperationsContainerColumn";
-import { ParcelOperationEditDialog } from "./ParcelOperationEditDialog";
+import { useAppDispatch } from "../../../../store/hooks";
+import { ParcelOperationsContainerColumn } from "./ParcelOperationsContainerColumn/ParcelOperationsContainerColumn";
+import { ParcelOperationEditDialog } from "./ParcelOperationEditDialog/ParcelOperationEditDialog";
 import {
   NotificationType,
   showNotification,
-} from "../../../store/features/uiSlice";
-import { sendUpdateParcelOperationRequest } from "../../../http/parcel";
-import { updateParcelOperation } from "../../../store/features/parcelSlice";
-import { getErrorMessage } from "../../../utils/getErrorMessage";
-import { logout } from "../../../store/features/authSlice";
+} from "../../../../store/features/uiSlice";
+import { sendUpdateParcelOperationPositionRequest } from "../../../../http/parcel";
+import { setParcelOperations } from "../../../../store/features/parcelSlice";
+import { getErrorMessage } from "../../../../utils/getErrorMessage";
+import { logout } from "../../../../store/features/authSlice";
 import { DragDropContext, DropResult } from "@hello-pangea/dnd";
 
 const decodeColumnName = (name: string) => {
@@ -30,22 +30,28 @@ const decodeColumnName = (name: string) => {
 export const ParcelOperationsContainer: React.FC<{
   parcelOperations: ParcelOperation[];
 }> = ({ parcelOperations }) => {
-  const plannedOperations = parcelOperations.filter((o) => o.status === 0);
-  const inProcessOperations = parcelOperations.filter((o) => o.status === 1);
-  const finishedOperations = parcelOperations.filter((o) => o.status === 2);
+  const plannedOperations = parcelOperations
+    .filter((o) => o.status === 0)
+    .sort((a, b) => a.index - b.index);
+  const inProcessOperations = parcelOperations
+    .filter((o) => o.status === 1)
+    .sort((a, b) => a.index - b.index);
+  const finishedOperations = parcelOperations
+    .filter((o) => o.status === 2)
+    .sort((a, b) => a.index - b.index);
   const dispatch = useAppDispatch();
 
   const handleDragEnd = (result: DropResult) => {
     const { destination, source, draggableId: operationId } = result;
 
-    if (!destination || destination.droppableId === source.droppableId) {
+    if (!destination) {
       return;
     }
-
     const newStatus = decodeColumnName(destination.droppableId);
     const parcelOperation = parcelOperations.find(
       (po) => po.id === operationId,
     );
+    const newIndex = destination.index;
     if (parcelOperation) {
       dispatch(
         showNotification({
@@ -53,10 +59,9 @@ export const ParcelOperationsContainer: React.FC<{
           type: NotificationType.INFO,
         }),
       );
-      sendUpdateParcelOperationRequest(parcelOperation.id, {
-        name: parcelOperation.name,
-        description: parcelOperation.description,
+      sendUpdateParcelOperationPositionRequest(parcelOperation.id, {
         status: newStatus,
+        index: newIndex,
       })
         .then((response) => {
           dispatch(
@@ -65,7 +70,7 @@ export const ParcelOperationsContainer: React.FC<{
               type: NotificationType.SUCCESS,
             }),
           );
-          dispatch(updateParcelOperation(response.data));
+          dispatch(setParcelOperations(response.data));
         })
         .catch((res) => {
           dispatch(

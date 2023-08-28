@@ -10,4 +10,5 @@ public class ParcelOperationResponse
     public string Name { get; set; }
     public string Description { get; set; }
     public ParcelOperationStatus Status { get; set; }
+    public int Index { get; set; }
 }

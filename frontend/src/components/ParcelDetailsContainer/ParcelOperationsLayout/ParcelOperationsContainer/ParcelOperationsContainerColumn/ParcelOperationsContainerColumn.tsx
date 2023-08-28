@@ -1,7 +1,7 @@
 import React from "react";
-import { ParcelOperation } from "../../../model/entities/ParcelOperation";
+import { ParcelOperation } from "../../../../../model/entities/ParcelOperation";
 import { Stack, Typography } from "@mui/material";
-import { ParcelOperationCard } from "./ParcelOperationCard";
+import { ParcelOperationCard } from "./ParcelOperationCard/ParcelOperationCard";
 import { Droppable } from "@hello-pangea/dnd";
 
 export const ParcelOperationsContainerColumn: React.FC<{

@@ -4,17 +4,41 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="176d7488-c927-4a9b-834c-b63535eec9ed" name="Changes" comment="" />
+    <list default="true" id="176d7488-c927-4a9b-834c-b63535eec9ed" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelDetailsLayout/ParcelLocationView/ParcelLocationEditDIalog/ParcelLocationEditDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelDetailsLayout/ParcelLocationView/ParcelLocationEditDIalog/ParcelLocationEditDialog.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelDetailsLayout/ParcelLocationView/ParcelLocationEditDIalog/ParcelLocationEditForm/ParcelLocationEditForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelDetailsLayout/ParcelLocationView/ParcelLocationEditDIalog/ParcelLocationEditForm/ParcelLocationEditForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelDetailsLayout/ParcelLocationView/ParcelLocationView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelDetailsLayout/ParcelLocationView/ParcelLocationView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsContainer/ParcelOperationEditDialog/ParcelOperationEditDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsContainer/ParcelOperationEditDialog/ParcelOperationEditDialog.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsContainer/ParcelOperationEditDialog/ParcelOperationEditForm/ParcelOperationEditForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsContainer/ParcelOperationEditDialog/ParcelOperationEditForm/ParcelOperationEditForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsContainer/ParcelOperationsContainerColumn/ParcelOperationCard/ParcelOperationCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsContainer/ParcelOperationsContainerColumn/ParcelOperationCard/ParcelOperationCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/uiSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/uiSlice.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -26,20 +50,42 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\prijo\\Desktop\\Praksa-Lilly021\\frontend\\node_modules\\prettier&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ReactCreateComponentLastSelected": "arrowFunctionComponent",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\prijo\\Desktop\\Praksa-Lilly021\\frontend\\node_modules\\prettier",
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "actions.on.save",
+    "ts.external.directory.path": "C:\\Users\\prijo\\Desktop\\Praksa-Lilly021\\frontend\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="ReactDesignerToolWindowState">
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.rcb.reactComponents" value="false" />
+        <entry key="com.haulmont.rcb.reactInspector" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\prijo\Desktop\Praksa-Lilly021\frontend\src\components\AuthForm" />
+      <recent name="C:\Users\prijo\Desktop\Praksa-Lilly021\frontend\src\components\ParcelForm" />
+      <recent name="C:\Users\prijo\Desktop\Praksa-Lilly021\frontend\src\components\ParcelDetailsContainer\ParcelDetailsLayout\ParcelLocationView\ParcelLocationEditDIalog\ParcelLocationEditForm\DraggableMarker" />
+      <recent name="C:\Users\prijo\Desktop\Praksa-Lilly021\frontend\src\components\ParcelDetailsContainer\ParcelDetailsLayout\ParcelLocationView\ParcelLocationEditDIalog\ParcelLocationEditForm" />
+      <recent name="C:\Users\prijo\Desktop\Praksa-Lilly021\frontend\src\components\ParcelDetailsContainer\ParcelDetailsLayout\ParcelLocationView\ParcelLocationEditDIalog" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -50,6 +96,8 @@
       <updated>1692966518305</updated>
       <workItem from="1692966521231" duration="341000" />
       <workItem from="1692968032570" duration="19000" />
+      <workItem from="1692968240501" duration="6874000" />
+      <workItem from="1693064001245" duration="13908000" />
     </task>
     <servers />
   </component>

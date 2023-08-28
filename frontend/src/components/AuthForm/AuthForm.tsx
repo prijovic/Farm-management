@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { AuthMode } from "./AuthMode";
 import {
   Card,
   CardActions,
@@ -16,7 +15,7 @@ import { Address } from "../../model/entities/Address";
 import { Moment } from "moment";
 import { sendLoginRequest, sendSignUpRequest } from "../../http/auth";
 import { useNavigate } from "react-router-dom";
-import { setToken } from "../../utils/auth";
+import { AuthMode, setToken } from "../../utils/auth";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { login } from "../../store/features/authSlice";
 import {

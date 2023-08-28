@@ -13,6 +13,11 @@ export enum NotificationType {
   INFO = "info",
 }
 
+export enum DialogContentType {
+  PARCEL_LOCATION_EDIT,
+  PARCEL_OPERATION_EDIT,
+}
+
 interface Notification {
   message: string;
   type: NotificationType;
@@ -21,16 +26,16 @@ interface Notification {
 interface UiState {
   theme: Theme;
   notification: Notification | null;
-  modal1IsOpened: boolean;
-  modal2IsOpened: boolean;
+  dialogIsOpened: boolean;
+  dialogContentType: DialogContentType;
   loading: boolean;
 }
 
 const initialState: UiState = {
   theme: Theme.DARK,
   notification: null,
-  modal1IsOpened: false,
-  modal2IsOpened: false,
+  dialogIsOpened: false,
+  dialogContentType: DialogContentType.PARCEL_OPERATION_EDIT,
   loading: false,
 };
 
@@ -47,11 +52,9 @@ export const uiSlice = createSlice({
     closeNotification: (state) => {
       state.notification = null;
     },
-    toggleModalIsOpened: (state) => {
-      state.modal1IsOpened = !state.modal1IsOpened;
-    },
-    toggleModal2IsOpened: (state) => {
-      state.modal2IsOpened = !state.modal2IsOpened;
+    toggleDialogIsOpened: (state, action: PayloadAction<DialogContentType>) => {
+      state.dialogIsOpened = !state.dialogIsOpened;
+      state.dialogContentType = action.payload;
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
@@ -63,17 +66,16 @@ export const {
   toggleTheme,
   showNotification,
   closeNotification,
-  toggleModalIsOpened,
+  toggleDialogIsOpened,
   setLoading,
-  toggleModal2IsOpened,
 } = uiSlice.actions;
 
 export const selectTheme = (state: RootState) => state.ui.theme;
 export const selectNotification = (state: RootState) => state.ui.notification;
-export const selectModalIsOpened = (state: RootState) =>
-  state.ui.modal1IsOpened;
-export const selectModal2IsOpened = (state: RootState) =>
-  state.ui.modal2IsOpened;
+export const selectDialogIsOpened = (state: RootState) =>
+  state.ui.dialogIsOpened;
+export const selectDialogContentType = (state: RootState) =>
+  state.ui.dialogContentType;
 export const selectLoading = (state: RootState) => state.ui.loading;
 
 export default uiSlice.reducer;
