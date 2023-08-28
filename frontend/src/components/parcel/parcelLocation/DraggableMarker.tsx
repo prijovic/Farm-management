@@ -4,6 +4,29 @@ import { Icon, LatLngTuple } from "leaflet";
 import { config } from "../../../config";
 import { useTheme } from "@mui/material";
 
+export class MarkerFactory {
+  private static id = 0;
+
+  public static generateMarker(
+    index: number,
+    position: [number, number],
+    onDrag: (index: number, position: LatLngTuple) => void,
+    onDelete: (index: number) => void,
+  ) {
+    const id = MarkerFactory.id;
+    MarkerFactory.id++;
+    return (
+      <DraggableMarker
+        key={id}
+        index={index}
+        center={position}
+        onDrag={onDrag}
+        onDelete={onDelete}
+      />
+    );
+  }
+}
+
 export const DraggableMarker: React.FC<{
   index: number;
   center: LatLngTuple;

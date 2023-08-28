@@ -15,5 +15,7 @@ export const PolygonOverlay: React.FC<{ positions: LatLngTuple[] }> = ({
   if (positions.length < 3) {
     return <Polyline positions={positions} pathOptions={color} />;
   }
-  return <Polygon pathOptions={color} positions={positions} />;
+  return (
+    <Polygon key={positions.length} pathOptions={color} positions={positions} />
+  );
 };

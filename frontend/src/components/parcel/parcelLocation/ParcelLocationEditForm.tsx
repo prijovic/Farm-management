@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import { LatLng, LatLngTuple, Map as LMap } from "leaflet";
 import classes from "./ParcelLocationView.module.css";
@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { DraggableMarker } from "./DraggableMarker";
-import { PolygonOverlay } from "./PolygonOverlay";
+import { MarkerFactory } from "./DraggableMarker/DraggableMarker";
 import { useParams } from "react-router-dom";
 import { useAppDispatch } from "../../../store/hooks";
 import { Location } from "../../../model/entities/Location";
@@ -29,29 +29,6 @@ import { getErrorMessage } from "../../../utils/getErrorMessage";
 interface MarkersState {
   markers: JSX.Element[];
   positions: any[];
-}
-
-class MarkerFactory {
-  private static id = 0;
-
-  public static generateMarker(
-    index: number,
-    position: [number, number],
-    onDrag: (index: number, position: LatLngTuple) => void,
-    onDelete: (index: number) => void,
-  ) {
-    const id = MarkerFactory.id;
-    MarkerFactory.id++;
-    return (
-      <DraggableMarker
-        key={id}
-        index={index}
-        center={position}
-        onDrag={onDrag}
-        onDelete={onDelete}
-      />
-    );
-  }
 }
 
 export const ParcelLocationEditForm: React.FC<{
@@ -83,6 +60,14 @@ export const ParcelLocationEditForm: React.FC<{
     });
   }, [polygon]);
 
+  const positionToLatLngTuple = useCallback((position: any): LatLngTuple => {
+    if (position instanceof LatLng) {
+      return [position["lat"], position["lng"]];
+    } else {
+      return [position[0], position[1]];
+    }
+  }, []);
+
   const handleAddMarker = () => {
     let mapCenter = center;
     if (mapRef && mapRef.current) {
@@ -93,10 +78,22 @@ export const ParcelLocationEditForm: React.FC<{
     }
     setMarkerPositions((prevState) => {
       const updatedMarkers = prevState.markers;
-      updatedMarkers.push(marker(prevState.markers.length, mapCenter));
+      let center = mapCenter;
+      if (updatedMarkers.length > 2) {
+        const lastPosition =
+          prevState.positions[prevState.positions.length - 1];
+        const lastPositionLatLng = positionToLatLngTuple(lastPosition);
+        const firstPosition = prevState.positions[0];
+        const firstPositionLatLng = positionToLatLngTuple(firstPosition);
+        center = [
+          (lastPositionLatLng[0] + firstPositionLatLng[0]) / 2,
+          (lastPositionLatLng[1] + firstPositionLatLng[1]) / 2,
+        ];
+      }
+      updatedMarkers.push(marker(prevState.markers.length, center));
 
       const updatedPositions = prevState.positions;
-      updatedPositions.push(mapCenter);
+      updatedPositions.push(center);
 
       return {
         markers: updatedMarkers,
@@ -145,10 +142,8 @@ export const ParcelLocationEditForm: React.FC<{
   const handleClickSave = () => {
     if (id && markerPositions.positions.length > 2) {
       const polygon = markerPositions.positions.map((p, index) => {
-        if (p instanceof LatLng) {
-          return new Location(p["lat"], p["lng"], index);
-        }
-        return new Location(p[0], p[1], index);
+        const locationLatLng = positionToLatLngTuple(p);
+        return new Location(locationLatLng[0], locationLatLng[1], index);
       });
       sendUpdateParcelPolygonRequest(id, { polygon })
         .then((response) => {
