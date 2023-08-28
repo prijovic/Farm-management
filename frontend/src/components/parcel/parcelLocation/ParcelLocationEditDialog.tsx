@@ -18,6 +18,7 @@ export const ParcelLocationEditDialog: React.FC<{
 
   return (
     <Dialog
+      scroll={"body"}
       open={modalIsOpened}
       onClose={() => dispatch(toggleModal2IsOpened())}
     >

@@ -18,7 +18,7 @@ export const ParcelOperationEditDialog: React.FC = () => {
   };
 
   return (
-    <Dialog open={modalIsOpened} onClose={handleDialogClose}>
+    <Dialog scroll={"body"} open={modalIsOpened} onClose={handleDialogClose}>
       <DialogContent>
         <ParcelOperationEditForm />
       </DialogContent>
