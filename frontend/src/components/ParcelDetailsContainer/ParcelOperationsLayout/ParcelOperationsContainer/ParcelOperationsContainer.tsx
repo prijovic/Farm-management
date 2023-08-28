@@ -1,23 +1,17 @@
 import React from "react";
-import { ParcelOperation } from "../../../model/entities/ParcelOperation";
+import { ParcelOperation } from "../../../../model/entities/ParcelOperation";
 import { Grid } from "@mui/material";
-import { useAppDispatch } from "../../../store/hooks";
-import { ParcelOperationsContainerColumn } from "./ParcelOperationsContainerColumn";
-import { ParcelOperationEditDialog } from "./ParcelOperationEditDialog";
+import { useAppDispatch } from "../../../../store/hooks";
+import { ParcelOperationsContainerColumn } from "./ParcelOperationsContainerColumn/ParcelOperationsContainerColumn";
+import { ParcelOperationEditDialog } from "./ParcelOperationEditDialog/ParcelOperationEditDialog";
 import {
   NotificationType,
   showNotification,
-} from "../../../store/features/uiSlice";
-import {
-  sendUpdateParcelOperationPositionRequest,
-  sendUpdateParcelOperationRequest,
-} from "../../../http/parcel";
-import {
-  setParcelOperations,
-  updateParcelOperation,
-} from "../../../store/features/parcelSlice";
-import { getErrorMessage } from "../../../utils/getErrorMessage";
-import { logout } from "../../../store/features/authSlice";
+} from "../../../../store/features/uiSlice";
+import { sendUpdateParcelOperationPositionRequest } from "../../../../http/parcel";
+import { setParcelOperations } from "../../../../store/features/parcelSlice";
+import { getErrorMessage } from "../../../../utils/getErrorMessage";
+import { logout } from "../../../../store/features/authSlice";
 import { DragDropContext, DropResult } from "@hello-pangea/dnd";
 
 const decodeColumnName = (name: string) => {

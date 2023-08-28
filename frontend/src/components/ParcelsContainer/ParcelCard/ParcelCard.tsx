@@ -2,8 +2,8 @@ import React from "react";
 import { Card, CardContent, Grid, Tooltip, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import classes from "./ParcelCard.module.css";
-import { Parcel } from "../../model/entities/Parcel";
-import { toDateOutput } from "../../utils/toDateOutput";
+import { Parcel } from "../../../model/entities/Parcel";
+import { toDateOutput } from "../../../utils/toDateOutput";
 import { EventAvailable, Event, EventRepeat } from "@mui/icons-material";
 
 export const ParcelCard: React.FC<{ parcel: Parcel }> = ({ parcel }) => {

@@ -6,8 +6,8 @@ import {
   CardContent,
   Typography,
 } from "@mui/material";
-import { Parcel } from "../../model/entities/Parcel";
-import { toDateOutput } from "../../utils/toDateOutput";
+import { Parcel } from "../../../../model/entities/Parcel";
+import { toDateOutput } from "../../../../utils/toDateOutput";
 import { Link } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 

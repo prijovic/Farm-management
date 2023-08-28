@@ -1,13 +1,13 @@
 import React from "react";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../../../store/hooks";
 import {
   selectModal2IsOpened,
   toggleModal2IsOpened,
-} from "../../../store/features/uiSlice";
+} from "../../../../../store/features/uiSlice";
 import { Button, Dialog, DialogActions, DialogContent } from "@mui/material";
-import { ParcelLocationEditForm } from "./ParcelLocationEditForm";
+import { ParcelLocationEditForm } from "./ParcelLocationEditForm/ParcelLocationEditForm";
 import { LatLngTuple } from "leaflet";
-import { Location } from "../../../model/entities/Location";
+import { Location } from "../../../../../model/entities/Location";
 
 export const ParcelLocationEditDialog: React.FC<{
   polygon: Location[];

@@ -1,10 +1,10 @@
 import React from "react";
-import { ParcelOperation } from "../../../model/entities/ParcelOperation";
+import { ParcelOperation } from "../../../../../../model/entities/ParcelOperation";
 import { Card, CardContent, Typography } from "@mui/material";
-import { toDateOutput } from "../../../utils/toDateOutput";
-import { useAppDispatch } from "../../../store/hooks";
-import { toggleModalIsOpened } from "../../../store/features/uiSlice";
-import { setParcelOperationId } from "../../../store/features/parcelSlice";
+import { toDateOutput } from "../../../../../../utils/toDateOutput";
+import { useAppDispatch } from "../../../../../../store/hooks";
+import { toggleModalIsOpened } from "../../../../../../store/features/uiSlice";
+import { setParcelOperationId } from "../../../../../../store/features/parcelSlice";
 import { Draggable } from "@hello-pangea/dnd";
 
 export const ParcelOperationCard: React.FC<{

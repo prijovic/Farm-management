@@ -1,25 +1,23 @@
-import React, {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
-import {AuthMode} from "../components/auth/AuthMode";
-import {AuthForm} from "../components/auth/AuthForm";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { AuthForm } from "../components/AuthForm/AuthForm";
+import { AuthMode } from "../utils/auth";
 
 export const AuthPage: React.FC = () => {
-    const {mode} = useParams();
-    const [modeEnum, setModeEnum] = useState(AuthMode.LOGIN);
+  const { mode } = useParams();
+  const [modeEnum, setModeEnum] = useState(AuthMode.LOGIN);
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        if (mode === "signUp") {
-            setModeEnum(AuthMode.SIGN_UP);
-        } else if (mode === "login") {
-            setModeEnum(AuthMode.LOGIN);
-        } else {
-            navigate("/auth/login", {replace: true})
-        }
-    }, [mode, navigate]);
+  useEffect(() => {
+    if (mode === "signUp") {
+      setModeEnum(AuthMode.SIGN_UP);
+    } else if (mode === "login") {
+      setModeEnum(AuthMode.LOGIN);
+    } else {
+      navigate("/auth/login", { replace: true });
+    }
+  }, [mode, navigate]);
 
-    return (
-        <AuthForm mode={modeEnum}/>
-    );
+  return <AuthForm mode={modeEnum} />;
 };

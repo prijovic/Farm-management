@@ -1,5 +1,5 @@
 import React from "react";
-import { ParcelCard } from "./ParcelCard";
+import { ParcelCard } from "./ParcelCard/ParcelCard";
 import { Button, Divider, Grid, Typography } from "@mui/material";
 import { Parcel } from "../../model/entities/Parcel";
 import { NavLink } from "react-router-dom";

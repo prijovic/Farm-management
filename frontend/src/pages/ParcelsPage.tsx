@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ParcelsContainer } from "../components/parcel/ParcelsContainer";
+import { ParcelsContainer } from "../components/ParcelsContainer/ParcelsContainer";
 import { getParcels } from "../http/parcel";
 import { NotificationType, showNotification } from "../store/features/uiSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";

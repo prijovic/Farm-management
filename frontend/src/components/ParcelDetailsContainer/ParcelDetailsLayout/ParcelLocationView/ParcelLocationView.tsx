@@ -1,14 +1,14 @@
 import React from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import classes from "./ParcelLocationView.module.css";
-import { Location } from "../../../model/entities/Location";
+import { Location } from "../../../../model/entities/Location";
 import { LatLngTuple } from "leaflet";
 import { IconButton, Tooltip, useTheme } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import { ParcelLocationEditDialog } from "./ParcelLocationEditDialog";
-import { useAppDispatch } from "../../../store/hooks";
-import { toggleModal2IsOpened } from "../../../store/features/uiSlice";
-import { PolygonOverlay } from "./PolygonOverlay";
+import { ParcelLocationEditDialog } from "./ParcelLocationEditDIalog/ParcelLocationEditDialog";
+import { useAppDispatch } from "../../../../store/hooks";
+import { toggleModal2IsOpened } from "../../../../store/features/uiSlice";
+import { PolygonOverlay } from "./PolygonOverlay/PolygonOverlay";
 
 export const ParcelLocationView: React.FC<{ polygon: Location[] }> = ({
   polygon,
