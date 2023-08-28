@@ -7,6 +7,6 @@ public class ParcelResponse
     public DateTime LastEditDate { get; set; }
     public string Name { get; set; }
     public long Number { get; set; }
-    public long Size { get; set; }
+    public double Size { get; set; }
     public List<LocationDTO> Polygon { get; set; }
 }

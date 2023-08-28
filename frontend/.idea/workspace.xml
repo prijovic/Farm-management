@@ -4,7 +4,36 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="176d7488-c927-4a9b-834c-b63535eec9ed" name="Changes" comment="" />
+    <list default="true" id="176d7488-c927-4a9b-834c-b63535eec9ed" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../backend/.idea/.idea.backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/.idea/.idea.backend/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/backend/DTOs/Request/Parcel/CUParcelOperationRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/DTOs/Request/Parcel/CUParcelOperationRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/backend/DTOs/Request/Parcel/CUParcelRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/DTOs/Request/Parcel/CUParcelRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/backend/DTOs/Response/ParcelOperationResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/DTOs/Response/ParcelOperationResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/backend/DTOs/Response/ParcelResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/DTOs/Response/ParcelResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/backend/Migrations/AppDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/Migrations/AppDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/backend/Models/Parcel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/Models/Parcel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/backend/Models/ParcelOperation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/Models/ParcelOperation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/backend/Profiles/ParcelOperationProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/Profiles/ParcelOperationProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/backend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/backend/Services/Parcel/GetParcelById.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/Services/Parcel/GetParcelById.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/backend/Services/ParcelOperation/CreateParcelOperation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/Services/ParcelOperation/CreateParcelOperation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/backend/Services/ParcelOperation/UpdateParcelOperation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/Services/ParcelOperation/UpdateParcelOperation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/backend/bin/Debug/net6.0/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/bin/Debug/net6.0/backend.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/backend/bin/Debug/net6.0/backend.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/bin/Debug/net6.0/backend.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/backend/obj/Debug/net6.0/backend.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/obj/Debug/net6.0/backend.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/backend/obj/Debug/net6.0/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/obj/Debug/net6.0/backend.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/backend/obj/Debug/net6.0/backend.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/obj/Debug/net6.0/backend.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/backend/obj/Debug/net6.0/ref/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/obj/Debug/net6.0/ref/backend.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/backend/obj/Debug/net6.0/refint/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/obj/Debug/net6.0/refint/backend.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/backend/obj/staticwebassets.pack.sentinel" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/obj/staticwebassets.pack.sentinel" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/parcel/parcelOperation/ParcelOperationEditDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/parcel/parcelOperation/ParcelOperationEditDialog.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/parcel/parcelOperation/ParcelOperationEditForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/parcel/parcelOperation/ParcelOperationEditForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/parcel/parcelOperation/ParcelOperationsContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/parcel/parcelOperation/ParcelOperationsContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/http/parcel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/parcel.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/entities/ParcelOperation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/entities/ParcelOperation.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/features/parcelSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/features/parcelSlice.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,9 +66,18 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\prijo\\Desktop\\Praksa-Lilly021\\frontend\\node_modules\\prettier&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\prijo\\Desktop\\Praksa-Lilly021\\frontend\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="ReactDesignerToolWindowState">
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.rcb.reactComponents" value="false" />
+        <entry key="com.haulmont.rcb.reactInspector" value="false" />
+      </map>
+    </option>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -50,6 +88,8 @@
       <updated>1692966518305</updated>
       <workItem from="1692966521231" duration="341000" />
       <workItem from="1692968032570" duration="19000" />
+      <workItem from="1692968240501" duration="6874000" />
+      <workItem from="1693064001245" duration="4468000" />
     </task>
     <servers />
   </component>
