@@ -26,7 +26,6 @@ import {
   updateParcel,
 } from "../../store/features/parcelSlice";
 import { getErrorMessage } from "../../utils/getErrorMessage";
-import { logout } from "../../store/features/authSlice";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 export const ParcelForm: React.FC = () => {
@@ -104,17 +103,14 @@ export const ParcelForm: React.FC = () => {
             navigate("/parcel/" + id, { replace: true });
           })
           .catch((res) => {
-            dispatch(
-              showNotification({
-                message: getErrorMessage(res),
-                type: NotificationType.ERROR,
-              }),
-            );
-          })
-          .catch((e) => {
-            if (e.message === "Unauthorized") {
-              logout();
-              dispatch(logout());
+            const message = getErrorMessage(res);
+            if (message) {
+              dispatch(
+                showNotification({
+                  message: message,
+                  type: NotificationType.ERROR,
+                }),
+              );
             }
           });
       } else {
@@ -135,17 +131,14 @@ export const ParcelForm: React.FC = () => {
             navigate("/parcel/all", { replace: true });
           })
           .catch((res) => {
-            dispatch(
-              showNotification({
-                message: getErrorMessage(res),
-                type: NotificationType.ERROR,
-              }),
-            );
-          })
-          .catch((e) => {
-            if (e.message === "Unauthorized") {
-              logout();
-              dispatch(logout());
+            const message = getErrorMessage(res);
+            if (message) {
+              dispatch(
+                showNotification({
+                  message: message,
+                  type: NotificationType.ERROR,
+                }),
+              );
             }
           });
       }
@@ -172,17 +165,14 @@ export const ParcelForm: React.FC = () => {
           navigate("/parcel/all", { replace: true });
         })
         .catch((res) => {
-          dispatch(
-            showNotification({
-              message: getErrorMessage(res),
-              type: NotificationType.ERROR,
-            }),
-          );
-        })
-        .catch((e) => {
-          if (e.message === "Unauthorized") {
-            logout();
-            dispatch(logout());
+          const message = getErrorMessage(res);
+          if (message) {
+            dispatch(
+              showNotification({
+                message: message,
+                type: NotificationType.ERROR,
+              }),
+            );
           }
         });
     }

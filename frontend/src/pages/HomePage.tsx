@@ -2,19 +2,17 @@ import React from "react";
 import { Button, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../store/hooks";
-import { selectIsAuthenticated } from "../store/features/authSlice";
+import { useRouteLoaderData } from "react-router";
 
 export const HomePage: React.FC = () => {
-  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const token = useRouteLoaderData("root");
 
-  const title = isAuthenticated
-    ? "Welcome!"
-    : "Start efficiently managing your land";
-  const body = isAuthenticated
+  const title = token ? "Welcome!" : "Start efficiently managing your land";
+  const body = token
     ? "Checkout your parcels and operations on them"
     : "Add time management for your land by easily creating a new account";
-  const url = isAuthenticated ? "/parcel/all" : "/auth/signUp";
-  const buttonText = isAuthenticated ? "Visit parcels" : "Create account";
+  const url = token ? "/parcel/all" : "/auth/signUp";
+  const buttonText = token ? "Visit parcels" : "Create account";
 
   return (
     <Grid container spacing={1}>

@@ -17,7 +17,6 @@ import { sendLoginRequest, sendSignUpRequest } from "../../http/auth";
 import { useNavigate } from "react-router-dom";
 import { AuthMode, setToken } from "../../utils/auth";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { login } from "../../store/features/authSlice";
 import {
   NotificationType,
   selectLoading,
@@ -153,20 +152,22 @@ export const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
           email,
           password,
         })
-          .then((response) => {
-            setToken(response.data);
-            dispatch(login());
+          .then((res) => {
             dispatch(setLoading(false));
-            navigate("/", { replace: true });
+            setToken(res.data);
+            navigate("/");
           })
           .catch((res) => {
             dispatch(setLoading(false));
-            dispatch(
-              showNotification({
-                message: getErrorMessage(res),
-                type: NotificationType.ERROR,
-              }),
-            );
+            const message = getErrorMessage(res);
+            if (message) {
+              dispatch(
+                showNotification({
+                  message: message,
+                  type: NotificationType.ERROR,
+                }),
+              );
+            }
           });
       } else if (mode === AuthMode.SIGN_UP) {
         sendSignUpRequest({
@@ -194,12 +195,15 @@ export const AuthForm: React.FC<AuthFormProps> = ({ mode }) => {
           })
           .catch((res) => {
             dispatch(setLoading(false));
-            dispatch(
-              showNotification({
-                message: getErrorMessage(res),
-                type: NotificationType.ERROR,
-              }),
-            );
+            const message = getErrorMessage(res);
+            if (message) {
+              dispatch(
+                showNotification({
+                  message: message,
+                  type: NotificationType.ERROR,
+                }),
+              );
+            }
           });
       }
     }

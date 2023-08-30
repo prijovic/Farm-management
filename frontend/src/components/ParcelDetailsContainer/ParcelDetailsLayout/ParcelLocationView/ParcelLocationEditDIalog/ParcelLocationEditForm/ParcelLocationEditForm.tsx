@@ -160,12 +160,15 @@ export const ParcelLocationEditForm: React.FC<{
           dispatch(updateParcel(response.data));
         })
         .catch((res) => {
-          dispatch(
-            showNotification({
-              message: getErrorMessage(res),
-              type: NotificationType.ERROR,
-            }),
-          );
+          const message = getErrorMessage(res);
+          if (message) {
+            dispatch(
+              showNotification({
+                message: message,
+                type: NotificationType.ERROR,
+              }),
+            );
+          }
         });
     }
   };
