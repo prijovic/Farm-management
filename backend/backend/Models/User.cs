@@ -11,4 +11,5 @@ public class User : IdentityUser<Guid>
 
     public virtual Address Address { get; set; } = null!;
     public virtual ICollection<Parcel> Parcels { get; set; } = new List<Parcel>();
+    public virtual ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
 }

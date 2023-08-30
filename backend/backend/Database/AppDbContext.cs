@@ -11,10 +11,12 @@ public class AppDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     {
     }
 
+    public DbSet<RefreshToken> RefreshTokens { get; set; }
+
     public DbSet<Parcel> Parcels { get; set; }
 
     public DbSet<ParcelOperation> ParcelOperations { get; set; }
-    
+
     public DbSet<Location> Locations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -27,6 +29,12 @@ public class AppDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
                 .WithOne(e => e.User)
                 .HasForeignKey(e => e.UserId)
                 .IsRequired(false)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasMany<RefreshToken>(e => e.RefreshTokens)
+                .WithOne(e => e.User)
+                .HasForeignKey(e => e.UserId)
+                .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 
             entity.HasOne<Address>(e => e.Address)

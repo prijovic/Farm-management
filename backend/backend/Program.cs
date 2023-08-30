@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using RefreshToken = backend.Services.auth.RefreshToken;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,7 +31,7 @@ var tokenValidationParameters = new TokenValidationParameters
     ValidateLifetime = true,
     ValidateIssuer = false, // DEVELOPMENT
     ValidateAudience = false, // DEVELOPMENT
-    RequireExpirationTime = false, // DEVELOPMENT
+    RequireExpirationTime = true,
     IssuerSigningKey =
         new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration.GetSection("JWTConfig:Secret").Value))
 };
@@ -66,7 +67,11 @@ builder.Services.AddSingleton(tokenValidationParameters);
 builder.Services.AddScoped<SignUpUser>();
 builder.Services.AddScoped<LoginUser>();
 builder.Services.AddScoped<GenerateJwt>();
+builder.Services.AddScoped<GenerateRefreshToken>();
+builder.Services.AddScoped<RefreshToken>();
+builder.Services.AddScoped<GenerateAuthenticationTokens>();
 builder.Services.AddScoped<GetLoggedInUser>();
+builder.Services.AddScoped<LogoutUser>();
 
 builder.Services.AddScoped<GetAllUserParcels>();
 builder.Services.AddScoped<CreateParcel>();
