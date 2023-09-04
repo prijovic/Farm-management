@@ -48,6 +48,5 @@ export const logout = () => {
 };
 
 export function tokenLoader() {
-  console.log("Loader triggered");
   return getToken();
 }

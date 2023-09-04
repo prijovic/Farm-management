@@ -6,41 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="176d7488-c927-4a9b-834c-b63535eec9ed" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../backend/.idea/.idea.backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/.idea/.idea.backend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/backend/Controllers/AuthController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/Controllers/AuthController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/backend/Database/AppDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/Database/AppDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/backend/Migrations/AppDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/Migrations/AppDbContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/backend/Models/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/Models/User.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/backend/Exceptions/GlobalExceptionHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/Exceptions/GlobalExceptionHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/backend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/backend/Services/Auth/GenerateJwt.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/Services/Auth/GenerateJwt.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/backend/Services/Auth/LoginUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/Services/Auth/LoginUser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/backend/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/backend/backend.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/backend.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/backend/bin/Debug/net6.0/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/bin/Debug/net6.0/appsettings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/backend/bin/Debug/net6.0/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/bin/Debug/net6.0/backend.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/backend/bin/Debug/net6.0/backend.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/bin/Debug/net6.0/backend.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/backend/obj/Debug/net6.0/backend.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/obj/Debug/net6.0/backend.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/backend/obj/Debug/net6.0/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/obj/Debug/net6.0/backend.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/backend/obj/Debug/net6.0/backend.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/obj/Debug/net6.0/backend.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/backend/obj/Debug/net6.0/ref/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/obj/Debug/net6.0/ref/backend.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/backend/obj/Debug/net6.0/refint/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/obj/Debug/net6.0/refint/backend.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/backend/obj/staticwebassets.pack.sentinel" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/obj/staticwebassets.pack.sentinel" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AuthForm/AuthForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AuthForm/AuthForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MainNavbar/MainNavbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MainNavbar/MainNavbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelDetailsLayout/ParcelLocationView/ParcelLocationEditDIalog/ParcelLocationEditForm/ParcelLocationEditForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelDetailsLayout/ParcelLocationView/ParcelLocationEditDIalog/ParcelLocationEditForm/ParcelLocationEditForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsContainer/ParcelOperationEditDialog/ParcelOperationEditForm/ParcelOperationEditForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsContainer/ParcelOperationEditDialog/ParcelOperationEditForm/ParcelOperationEditForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsContainer/ParcelOperationsContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsContainer/ParcelOperationsContainer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ParcelForm/ParcelForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ParcelForm/ParcelForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/UI/InputField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/InputField.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/http/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/auth.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/http/axioInstance.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/http/axioInstance.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/RootLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/RootLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/HomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/HomePage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/ParcelsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/ParcelsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/ProtectedRoute.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/ProtectedRoute.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/features/authSlice.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/auth.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/getErrorMessage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/getErrorMessage.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +29,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript File" />
+        <option value="Dockerfile" />
       </list>
     </option>
   </component>
@@ -70,23 +49,23 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ReactCreateComponentLastSelected": "arrowFunctionComponent",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\prijo\\Desktop\\Praksa-Lilly021\\frontend\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "ts.external.directory.path": "C:\\Users\\prijo\\Desktop\\Praksa-Lilly021\\frontend\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ReactCreateComponentLastSelected&quot;: &quot;arrowFunctionComponent&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\prijo\\Desktop\\Praksa-Lilly021\\frontend\\node_modules\\prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\prijo\\Desktop\\Praksa-Lilly021\\frontend\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -94,6 +73,31 @@
         <entry key="com.haulmont.rcb.reactInspector" value="false" />
       </map>
     </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Dockerfile build" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="imageTag" value="nodealpine_build" />
+          <option name="buildCliOptions" value="--target build" />
+          <option name="buildKitEnabled" value="true" />
+          <option name="buildOnly" value="true" />
+          <option name="sourceFilePath" value="Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
+      <deployment type="dockerfile">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.Dockerfile build" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -107,6 +111,9 @@
       <workItem from="1692968032570" duration="19000" />
       <workItem from="1693240163781" duration="564000" />
       <workItem from="1693292857386" duration="20163000" />
+      <workItem from="1693380281556" duration="615000" />
+      <workItem from="1693487045148" duration="3477000" />
+      <workItem from="1693551661167" duration="6078000" />
     </task>
     <servers />
   </component>

@@ -3,6 +3,7 @@ using backend.Configurations;
 using backend.Database;
 using backend.Models;
 using backend.Services.auth;
+using backend.Services.Cache;
 using backend.Services.Parcel;
 using backend.Services.ParcelOperation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -63,6 +64,12 @@ builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddSingleton(tokenValidationParameters);
+builder.Services.AddSingleton(new CacheConnectionString
+{
+    Value = builder.Configuration.GetConnectionString("CacheConnection")
+});
+
+builder.Services.AddScoped<ICacheService, CacheService>();
 
 builder.Services.AddScoped<SignUpUser>();
 builder.Services.AddScoped<LoginUser>();
@@ -97,11 +104,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors(x =>
-    x.AllowAnyOrigin()
+    x.WithOrigins("http://localhost:3000")
         .AllowAnyMethod()
         .AllowAnyHeader());
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -109,5 +116,7 @@ app.UseAuthorization();
 app.AddGlobalErrorHandler();
 
 app.MapControllers();
+
+app.Services.CreateScope().ServiceProvider.GetRequiredService<AppDbContext>().Database.Migrate();
 
 app.Run();

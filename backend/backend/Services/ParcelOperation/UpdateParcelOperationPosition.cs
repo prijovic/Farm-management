@@ -3,6 +3,7 @@ using backend.Database;
 using backend.DTOs.Request.Parcel;
 using backend.DTOs.Response;
 using backend.Models;
+using backend.Services.Cache;
 using Microsoft.EntityFrameworkCore;
 
 namespace backend.Services.ParcelOperation;
@@ -14,12 +15,14 @@ public class UpdateParcelOperationPosition
     private readonly GetParcelOperationById _getParcelOperationById;
 
     private readonly IMapper _mapper;
+    private readonly ICacheService _cacheService;
 
-    public UpdateParcelOperationPosition(AppDbContext context, IMapper mapper,
+    public UpdateParcelOperationPosition(AppDbContext context, IMapper mapper, ICacheService cacheService,
         GetParcelOperationById getParcelOperationById, GetAllParcelOperations getAllParcelOperations)
     {
         _mapper = mapper;
         _context = context;
+        _cacheService = cacheService;
         _getParcelOperationById = getParcelOperationById;
         _getAllParcelOperations = getAllParcelOperations;
     }
