@@ -11,17 +11,15 @@ import {
   Typography,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Link, NavLink } from "react-router-dom";
-import { logout } from "../../utils/auth";
-import {
-  logout as logoutAction,
-  selectIsAuthenticated,
-} from "../../store/features/authSlice";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../store/hooks";
 import logo from "../../assets/lilly021.png";
 import classes from "./MainNavbar.module.css";
 import { ThemeToggle } from "../ThemeToggle";
 import { selectTheme, Theme } from "../../store/features/uiSlice";
+import { useRouteLoaderData } from "react-router";
+import { sendLogoutRequest } from "../../http/auth";
+import { logout } from "../../utils/auth";
 
 const unauthenticatedPages = ["Login", "Sign Up"];
 const authenticatedPages = ["Parcels"];
@@ -32,9 +30,9 @@ export const MainNavbar: React.FC = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null,
   );
-  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+  const token = useRouteLoaderData("root");
   const theme = useAppSelector(selectTheme);
-  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -42,6 +40,15 @@ export const MainNavbar: React.FC = () => {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  const handleLogout = () => {
+    sendLogoutRequest()
+      .then(() => {
+        logout();
+        navigate("/auth/login");
+      })
+      .catch(() => {});
   };
 
   const mapMenuItems = (pages: string[], routes: string[]) => {
@@ -61,8 +68,7 @@ export const MainNavbar: React.FC = () => {
         <MenuItem
           onClick={() => {
             handleCloseNavMenu();
-            logout();
-            dispatch(logoutAction());
+            handleLogout();
           }}
         >
           <Typography textAlign="center">Logout</Typography>
@@ -73,7 +79,7 @@ export const MainNavbar: React.FC = () => {
   };
 
   const menuItems = () => {
-    return !isAuthenticated
+    return !token
       ? mapMenuItems(unauthenticatedPages, unauthenticatedRoutes)
       : authenticatedMenuItems();
   };
@@ -96,10 +102,7 @@ export const MainNavbar: React.FC = () => {
     menuItems.push(
       <Link key={"Logout"} to={"/auth/login"}>
         <Button
-          onClick={() => {
-            dispatch(logoutAction());
-            logout();
-          }}
+          onClick={handleLogout}
           sx={{ my: 2, color: "white", display: "block" }}
         >
           Logout
@@ -110,7 +113,7 @@ export const MainNavbar: React.FC = () => {
   };
 
   const navLinks = () => {
-    return !isAuthenticated
+    return !token
       ? mapNavLinks(unauthenticatedPages, unauthenticatedRoutes)
       : authenticatedNavLinks();
   };

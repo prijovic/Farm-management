@@ -11,7 +11,6 @@ import {
 import { sendUpdateParcelOperationPositionRequest } from "../../../../http/parcel";
 import { setParcelOperations } from "../../../../store/features/parcelSlice";
 import { getErrorMessage } from "../../../../utils/getErrorMessage";
-import { logout } from "../../../../store/features/authSlice";
 import { DragDropContext, DropResult } from "@hello-pangea/dnd";
 
 const decodeColumnName = (name: string) => {
@@ -73,17 +72,14 @@ export const ParcelOperationsContainer: React.FC<{
           dispatch(setParcelOperations(response.data));
         })
         .catch((res) => {
-          dispatch(
-            showNotification({
-              message: getErrorMessage(res),
-              type: NotificationType.ERROR,
-            }),
-          );
-        })
-        .catch((e) => {
-          if (e.message === "Unauthorized") {
-            logout();
-            dispatch(logout());
+          const message = getErrorMessage(res);
+          if (message) {
+            dispatch(
+              showNotification({
+                message: message,
+                type: NotificationType.ERROR,
+              }),
+            );
           }
         });
     }

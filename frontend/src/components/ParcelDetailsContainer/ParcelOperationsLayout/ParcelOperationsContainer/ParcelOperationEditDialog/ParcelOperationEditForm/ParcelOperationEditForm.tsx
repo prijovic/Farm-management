@@ -28,8 +28,8 @@ import {
   updateParcelOperation,
 } from "../../../../../../store/features/parcelSlice";
 import { getErrorMessage } from "../../../../../../utils/getErrorMessage";
-import { logout } from "../../../../../../store/features/authSlice";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { logout } from "../../../../../../utils/auth";
 
 export const ParcelOperationEditForm: React.FC = () => {
   const { id: parcelId } = useParams();
@@ -97,17 +97,14 @@ export const ParcelOperationEditForm: React.FC = () => {
               dispatch(addParcelOperation(response.data));
             })
             .catch((res) => {
-              dispatch(
-                showNotification({
-                  message: getErrorMessage(res),
-                  type: NotificationType.ERROR,
-                }),
-              );
-            })
-            .catch((e) => {
-              if (e.message === "Unauthorized") {
-                logout();
-                dispatch(logout());
+              const message = getErrorMessage(res);
+              if (message) {
+                dispatch(
+                  showNotification({
+                    message: message,
+                    type: NotificationType.ERROR,
+                  }),
+                );
               }
             });
         } else {
@@ -134,17 +131,14 @@ export const ParcelOperationEditForm: React.FC = () => {
               dispatch(updateParcelOperation(response.data));
             })
             .catch((res) => {
-              dispatch(
-                showNotification({
-                  message: getErrorMessage(res),
-                  type: NotificationType.ERROR,
-                }),
-              );
-            })
-            .catch((e) => {
-              if (e.message === "Unauthorized") {
-                logout();
-                dispatch(logout());
+              const message = getErrorMessage(res);
+              if (message) {
+                dispatch(
+                  showNotification({
+                    message: message,
+                    type: NotificationType.ERROR,
+                  }),
+                );
               }
             });
         }
@@ -172,17 +166,14 @@ export const ParcelOperationEditForm: React.FC = () => {
           dispatch(deleteParcelOperationAction(response.data));
         })
         .catch((res) => {
-          dispatch(
-            showNotification({
-              message: getErrorMessage(res),
-              type: NotificationType.ERROR,
-            }),
-          );
-        })
-        .catch((e) => {
-          if (e.message === "Unauthorized") {
-            logout();
-            dispatch(logout());
+          const message = getErrorMessage(res);
+          if (message) {
+            dispatch(
+              showNotification({
+                message: message,
+                type: NotificationType.ERROR,
+              }),
+            );
           }
         });
     }

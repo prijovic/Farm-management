@@ -24,7 +24,6 @@ import {
 } from "../../../store/features/parcelSlice";
 import { getParcelOperations } from "../../../http/parcel";
 import { getErrorMessage } from "../../../utils/getErrorMessage";
-import { logout } from "../../../store/features/authSlice";
 
 export const ParcelOperationsLayout: React.FC<{ id: string }> = ({ id }) => {
   const theme = useTheme();
@@ -41,17 +40,14 @@ export const ParcelOperationsLayout: React.FC<{ id: string }> = ({ id }) => {
             dispatch(setParcelOperations(response.data));
           })
           .catch((res) => {
-            dispatch(
-              showNotification({
-                message: getErrorMessage(res),
-                type: NotificationType.ERROR,
-              }),
-            );
-          })
-          .catch((e) => {
-            if (e.message === "Unauthorized") {
-              logout();
-              dispatch(logout());
+            const message = getErrorMessage(res);
+            if (message) {
+              dispatch(
+                showNotification({
+                  message: message,
+                  type: NotificationType.ERROR,
+                }),
+              );
             }
           });
       }

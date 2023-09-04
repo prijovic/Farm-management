@@ -10,11 +10,40 @@
   <component name="ChangeListManager">
     <list default="true" id="7f8ac048-c74f-4d5f-92ba-28f2d3a11691" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.backend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/DTOs/Response/ParcelResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/DTOs/Response/ParcelResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/Profiles/ParcelProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Profiles/ParcelProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/Services/Parcel/GetAllUserParcels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Services/Parcel/GetAllUserParcels.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Controllers/AuthController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Controllers/AuthController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Database/AppDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Database/AppDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Migrations/AppDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Migrations/AppDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Models/User.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Models/User.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Services/Auth/GenerateJwt.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Services/Auth/GenerateJwt.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Services/Auth/GetLoggedInUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Services/Auth/GetLoggedInUser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/Services/Auth/LoginUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Services/Auth/LoginUser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/bin/Debug/net6.0/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bin/Debug/net6.0/backend.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/bin/Debug/net6.0/backend.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/backend/bin/Debug/net6.0/backend.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net6.0/backend.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net6.0/backend.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net6.0/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net6.0/backend.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net6.0/backend.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net6.0/backend.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net6.0/ref/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net6.0/ref/backend.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/obj/Debug/net6.0/refint/backend.dll" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/Debug/net6.0/refint/backend.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/obj/staticwebassets.pack.sentinel" beforeDir="false" afterPath="$PROJECT_DIR$/backend/obj/staticwebassets.pack.sentinel" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/parcel/parcelOperation/ParcelOperationEditDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/parcel/parcelOperation/ParcelOperationEditDialog.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/AuthForm/AuthForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/AuthForm/AuthForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/MainNavbar/MainNavbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/MainNavbar/MainNavbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsContainer/ParcelOperationEditDialog/ParcelOperationEditForm/ParcelOperationEditForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsContainer/ParcelOperationEditDialog/ParcelOperationEditForm/ParcelOperationEditForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsContainer/ParcelOperationsContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsContainer/ParcelOperationsContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/ParcelDetailsContainer/ParcelOperationsLayout/ParcelOperationsLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/ParcelForm/ParcelForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/ParcelForm/ParcelForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/UI/InputField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/UI/InputField.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/http/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/http/auth.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/http/axioInstance.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/http/axioInstance.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/layouts/RootLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/layouts/RootLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/pages/HomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/pages/HomePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/pages/ParcelsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/pages/ParcelsPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/router/ProtectedRoute.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/router/ProtectedRoute.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/router/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/router/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/store/features/authSlice.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/store/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/store/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/utils/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/utils/auth.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +54,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7b9a533b55d9a3c0765407ed0dd18b43332ea208c5a7057dbcf33a8d6917255/TokenValidationParameters.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7d9a41d47547e1fe7fe548b21ab4de12cc2671170a023bc8c629017837eb5f4/ActionMethodExecutor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b12ad9547e42ca3978b2148023a81a888a7874c1b210dc6def9fc0e7739e19/AsyncVoidMethodBuilder.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -42,7 +72,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "feature-parcel__operations__sorting",
+    "git-widget-placeholder": "technical-migration__to__formik",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -106,6 +136,8 @@
       <workItem from="1692968069008" duration="89000" />
       <workItem from="1692968390908" duration="6986000" />
       <workItem from="1693064086291" duration="18453000" />
+      <workItem from="1693240122061" duration="565000" />
+      <workItem from="1693292907850" duration="16903000" />
     </task>
     <servers />
   </component>
