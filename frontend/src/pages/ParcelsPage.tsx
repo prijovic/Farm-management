@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { ParcelsContainer } from "../components/parcel/ParcelsContainer";
+import { ParcelsContainer } from "../components/ParcelsContainer/ParcelsContainer";
 import { getParcels } from "../http/parcel";
 import { NotificationType, showNotification } from "../store/features/uiSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { selectParcels, setParcels } from "../store/features/parcelSlice";
 import { getErrorMessage } from "../utils/getErrorMessage";
-import { logout } from "../store/features/authSlice";
 import { Parcel } from "../model/entities/Parcel";
 
 export const ParcelsPage: React.FC = () => {
@@ -24,17 +23,14 @@ export const ParcelsPage: React.FC = () => {
           dispatch(setParcels(parcels));
         })
         .catch((res) => {
-          dispatch(
-            showNotification({
-              message: getErrorMessage(res),
-              type: NotificationType.ERROR,
-            }),
-          );
-        })
-        .catch((e) => {
-          if (e.message === "Unauthorized") {
-            logout();
-            dispatch(logout());
+          const message = getErrorMessage(res);
+          if (message) {
+            dispatch(
+              showNotification({
+                message: message,
+                type: NotificationType.ERROR,
+              }),
+            );
           }
         });
     }

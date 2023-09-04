@@ -1,14 +1,14 @@
 import React from "react";
-import {useAppSelector} from "../store/hooks";
-import {selectIsAuthenticated} from "../store/features/authSlice";
-import {Navigate} from "react-router";
+import { Navigate, useRouteLoaderData } from "react-router";
 
-export const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({children}) => {
-    const isAuthenticated = useAppSelector(selectIsAuthenticated);
+export const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const token = useRouteLoaderData("root");
 
-    if (isAuthenticated) {
-        return <>{children}</>;
-    }
+  if (!!token) {
+    return <>{children}</>;
+  }
 
-    return <Navigate to={"/auth/login"} replace/>;
+  return <Navigate to={"/auth/login"} replace />;
 };

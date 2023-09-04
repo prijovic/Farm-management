@@ -3,12 +3,14 @@ using backend.Configurations;
 using backend.Database;
 using backend.Models;
 using backend.Services.auth;
+using backend.Services.Cache;
 using backend.Services.Parcel;
 using backend.Services.ParcelOperation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using RefreshToken = backend.Services.auth.RefreshToken;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,7 +32,7 @@ var tokenValidationParameters = new TokenValidationParameters
     ValidateLifetime = true,
     ValidateIssuer = false, // DEVELOPMENT
     ValidateAudience = false, // DEVELOPMENT
-    RequireExpirationTime = false, // DEVELOPMENT
+    RequireExpirationTime = true,
     IssuerSigningKey =
         new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration.GetSection("JWTConfig:Secret").Value))
 };
@@ -62,11 +64,21 @@ builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddSingleton(tokenValidationParameters);
+builder.Services.AddSingleton(new CacheConnectionString
+{
+    Value = builder.Configuration.GetConnectionString("CacheConnection")
+});
+
+builder.Services.AddScoped<ICacheService, CacheService>();
 
 builder.Services.AddScoped<SignUpUser>();
 builder.Services.AddScoped<LoginUser>();
 builder.Services.AddScoped<GenerateJwt>();
+builder.Services.AddScoped<GenerateRefreshToken>();
+builder.Services.AddScoped<RefreshToken>();
+builder.Services.AddScoped<GenerateAuthenticationTokens>();
 builder.Services.AddScoped<GetLoggedInUser>();
+builder.Services.AddScoped<LogoutUser>();
 
 builder.Services.AddScoped<GetAllUserParcels>();
 builder.Services.AddScoped<CreateParcel>();
@@ -77,7 +89,10 @@ builder.Services.AddScoped<CreateParcelOperation>();
 builder.Services.AddScoped<UpdateParcelOperation>();
 builder.Services.AddScoped<DeleteParcelOperation>();
 builder.Services.AddScoped<UpdateParcelPolygon>();
+builder.Services.AddScoped<UpdateParcelOperationPosition>();
 builder.Services.AddScoped<GetParcelById>();
+builder.Services.AddScoped<GetParcelOperationById>();
+builder.Services.AddScoped<GetNextParcelOperationIndex>();
 
 var app = builder.Build();
 
@@ -89,11 +104,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors(x =>
-    x.AllowAnyOrigin()
+    x.WithOrigins("http://localhost:3000")
         .AllowAnyMethod()
         .AllowAnyHeader());
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -101,5 +116,7 @@ app.UseAuthorization();
 app.AddGlobalErrorHandler();
 
 app.MapControllers();
+
+app.Services.CreateScope().ServiceProvider.GetRequiredService<AppDbContext>().Database.Migrate();
 
 app.Run();

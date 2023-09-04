@@ -1,0 +1,66 @@
+﻿networks:
+  dev:
+    driver: bridge
+
+services:
+  app_cache:
+    image: redis/redis-stack:latest
+    container_name: app_cache
+    restart: always
+    ports:
+      - "6379:6379"
+    command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    volumes:
+      - cache:/data
+    networks:
+      - dev
+
+  app_db:
+    image: postgres:latest
+    container_name: app_db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=Lilly021
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+      - app_data:/var/lib/postgresql/data
+    networks:
+      - dev
+
+  backend:
+    image: docker.io/library/parcelapp
+    depends_on:
+      - "app_db"
+      - "app_cache"
+    container_name: parcelapp-services
+    ports:
+      - "8080:80"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: [ "dotnet", "ef", "database", "update" ]
+    environment:
+      - ConnectionStrings__DefaultConnection=User ID=postgres;Password=admin;Server=app_db;Port=5432;Database=Lilly021; Integrated Security=true;Pooling=true;
+      - ConnectionStrings__CacheConnection=app_cache:6379,password=eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+      - ASPNETCORE_URLS=http://+:80
+    networks:
+      - dev
+  
+  frontend:
+    image: docker.io/library/parcelapp-front
+    container_name: parcelapp-views
+    ports:
+      - "3000:80"
+    build:
+      context: ../../frontend
+      dockerfile: Dockerfile
+    networks:
+      - dev
+
+volumes:
+  cache:
+  app_data:
+  

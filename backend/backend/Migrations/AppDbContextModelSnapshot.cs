@@ -232,8 +232,8 @@ namespace backend.Migrations
                     b.Property<long>("Number")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("Size")
-                        .HasColumnType("bigint");
+                    b.Property<double>("Size")
+                        .HasColumnType("double precision");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
@@ -258,6 +258,9 @@ namespace backend.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("Index")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("LastEditDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -276,6 +279,45 @@ namespace backend.Migrations
                     b.HasIndex("ParcelId");
 
                     b.ToTable("ParcelOperations");
+                });
+
+            modelBuilder.Entity("backend.Models.RefreshToken", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("ExpiryDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsRevoked")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsUsed")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("JwtId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("LastEditDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("RefreshTokens");
                 });
 
             modelBuilder.Entity("backend.Models.User", b =>
@@ -452,6 +494,17 @@ namespace backend.Migrations
                     b.Navigation("Parcel");
                 });
 
+            modelBuilder.Entity("backend.Models.RefreshToken", b =>
+                {
+                    b.HasOne("backend.Models.User", "User")
+                        .WithMany("RefreshTokens")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("backend.Models.Parcel", b =>
                 {
                     b.Navigation("Operations");
@@ -465,6 +518,8 @@ namespace backend.Migrations
                         .IsRequired();
 
                     b.Navigation("Parcels");
+
+                    b.Navigation("RefreshTokens");
                 });
 #pragma warning restore 612, 618
         }
