@@ -1,0 +1,23 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  backend:
+    build:
+      context: "C:\\Users\\prijo\\Desktop\\Praksa-Lilly021\\backend\\backend"
+      dockerfile: "Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net6.0/backend.dll"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+      NUGET_PACKAGES: "C:\\Users\\prijo\\.nuget\\packages"
+      NUGET_FALLBACK_PACKAGES: "C:\\Users\\prijo\\.nuget\\packages"
+    image: "library/parcelapp:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\prijo\\.nuget\\packages:/root/.nuget/fallbackpackages"
+    - "C:\\Users\\prijo\\Desktop\\Praksa-Lilly021\\backend\\backend:/app:rw"
+    - "C:\\Users\\prijo\\Desktop\\Praksa-Lilly021\\backend:/src:rw"
+    working_dir: "/app"
